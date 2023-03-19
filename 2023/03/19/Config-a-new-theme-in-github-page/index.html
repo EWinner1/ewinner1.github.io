@@ -296,8 +296,8 @@
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="pc">2023-03-19 15:16:13</span>
-            <span class="mobile">2023-03-19 15:16</span>
+            <span class="pc">2023-03-19 16:49:39</span>
+            <span class="mobile">2023-03-19 16:49</span>
             <span class="hover-info">更新</span>
         </span>
     
@@ -333,16 +333,16 @@
 
             <div class="article-content markdown-body">
                 <h1 id="选择一个你喜欢的主题"><a href="#选择一个你喜欢的主题" class="headerlink" title="选择一个你喜欢的主题"></a>选择一个你喜欢的主题</h1><p>安装一个新的主题首先当然是选择一个你喜欢的样式, 对于 hexo, 你可以在<a class="link"   target="_blank" rel="noopener" href="https://hexo.io/themes/" >这里 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>寻找到你喜欢的主题的样式, 这里选择的是<a class="link"   target="_blank" rel="noopener" href="https://github.com/EvanNotFound/hexo-theme-redefine" >Redefine theme <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>, 其具有不错的样式和中文文档。</p>
-<h1 id="开始安装"><a href="#开始安装" class="headerlink" title="开始安装"></a>开始安装</h1><p>推荐使用<code>npm</code>进行安装。</p>
+<h1 id="开始安装"><a href="#开始安装" class="headerlink" title="开始安装"></a>开始安装</h1><p>推荐使用 <code>npm</code> 进行安装。</p>
 <div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-theme-redefine@latest</span><br></pre></td></tr></table></figure></div>
 
 <div class="note-large notel-blue"><div class="notel-title"><p>如何更新？</p>
-</div><div class="notel-content"><p>我们可以通过<code>npm</code>安装最新版本</p>
+</div><div class="notel-content"><p>我们可以通过 <code>npm</code> 安装最新版本</p>
 <div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-theme-redefine@latest</span><br></pre></td></tr></table></figure></div>
 
-<p>需要注意的是在进行更新后要检查<code>\node_modules\hexo-theme-redefine\_config.yml</code>和当前主题的配置文件<code>_config.redefine.yml</code>的关键信息是否一致, 否则可能导致构建错误。</p>
+<p>需要注意的是在进行更新后要检查 <code>\node_modules\hexo-theme-redefine\_config.yml</code> 和当前主题的配置文件 <code>_config.redefine.yml</code> 的关键信息是否一致, 否则可能导致构建错误。</p>
  </div></div>
-<p>在安装完成后, 要将<code>_config.yml</code>中的<code>theme: xxxx</code>改为<code>theme: redefine</code></p>
+<p>在安装完成后, 要将 <code>_config.yml</code> 中的 <code>theme: xxxx</code> 改为 <code>theme: redefine</code></p>
 <h1 id="开始配置"><a href="#开始配置" class="headerlink" title="开始配置"></a>开始配置</h1><p>完整的配置方案请点击<a class="link"   target="_blank" rel="noopener" href="https://redefine-docs.ohevan.com/docs/intro" >这里 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>, 这里只简单的介绍一些基本的配置。</p>
 <h2 id="base-info"><a href="#base-info" class="headerlink" title="base_info"></a>base_info</h2><div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">base_info:</span><br><span class="line">  title: Theme Redefine # 网站标题</span><br><span class="line">  author: The Redefine Team # 作者名称</span><br><span class="line">  url: https://xxxx # Base URL</span><br></pre></td></tr></table></figure></div>
 
@@ -352,7 +352,7 @@
 
 <h3 id="favicon"><a href="#favicon" class="headerlink" title="favicon"></a>favicon</h3><p>设置网站显示在 Title 的 logo, 也可以使用外链或者本地链接</p>
 <h3 id="right-side-width"><a href="#right-side-width" class="headerlink" title="right_side_width"></a>right_side_width</h3><p>设置右侧目录模块的宽度。一般情况下, 你无需修改。如需设置, 请保持单位为<code>px</code></p>
-<h3 id="first-screen"><a href="#first-screen" class="headerlink" title="first_screen"></a>first_screen</h3><p>开启后将显示在网站首页。配置为<code>enable</code>开启首屏<br><code>background_image</code>首屏背景图片, 可使用本地图片或图片外链 URL</p>
+<h3 id="first-screen"><a href="#first-screen" class="headerlink" title="first_screen"></a>first_screen</h3><p>开启后将显示在网站首页。配置为 <code>enable</code> 开启首屏<br><code>background_image</code> 首屏背景图片, 可使用本地图片或图片外链 URL</p>
 <div class="note-large notel-blue"><div class="notel-title"><p>Notice</p>
 </div><div class="notel-content"><p>（如果你的 Hexo 博客的网址位于子目录, 比如 <a class="link"   target="_blank" rel="noopener" href="https://example.com/blog" >https://example.com/blog <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>, 请使用 图片外链 URL）</p>
  </div></div>
