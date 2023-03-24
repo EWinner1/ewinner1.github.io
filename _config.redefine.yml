@@ -64,7 +64,7 @@ style:
     custom_font: # custom font for the first screen
       enable: true
       font_family: "Source Code Pro" # the font family name of the url below
-      font_url: "/source/custom-style.css" # The url to the font stylesheet file (css file)
+      font_url: "https://adobe-fonts.github.io/source-code-pro/" # The url to the font stylesheet file (css file)
 
   # Scroll style settings
   scroll:
@@ -85,17 +85,17 @@ custom: # custom font for the whole site
     english: # custom font for English
       enable: true
       font_family: "Source Code Pro" # the font family name of the url below
-      font_url: "/source/custom-style.css" # The url to the font stylesheet file (css)
+      font_url: "https://adobe-fonts.github.io/source-code-pro/" # The url to the font stylesheet file (css)
 
 # ---------------------------------------------------------------------------------------
 # Social contact link
 # ---------------------------------------------------------------------------------------
 social_contact: # social contact icons in the first screen, you can add more by using fontawesome icon names
-  enable: false
+  enable: true
   links:
-    github: # your GitHub URL
+    github: "https://github.com/EWinner1"
     instagram: # your Instagram URL
-    zhihu: # your ZhiHu URL
+    zhihu: "https://www.zhihu.com/people/justin-william"
     twitter: # your twitter URL
     email: # your email
     # ...... # you can add more
@@ -158,7 +158,7 @@ post:
     enable: true
     auto: false # if true, show Lv1, Lv2, Lv3... , If false, show custom label
     # label array item can be one or more
-    custom_label_list: ["Mountain"]
+    custom_label_list: ["Valley", "Depression", "River", "Mountain"]
 
 # ---------------------------------------------------------------------------------------
 # Code copy
@@ -169,7 +169,7 @@ code_block:
   custom_font: # custom font family, default: Ubuntu Mono
     enable: true
     font_family: "Source Code Pro" # font family name
-    font_url: "/source/custom-style.css" # The url to the font stylesheet file (css file)
+    font_url: "https://adobe-fonts.github.io/source-code-pro/" # The url to the font stylesheet file (css file)
 
 # ---------------------------------------------------------------------------------------
 # Table of Contents in the Sidebar
