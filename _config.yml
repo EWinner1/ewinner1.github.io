@@ -108,3 +108,4 @@ deploy:
   # 这里是你刚刚复制的地址
   branch: master
   # 仓库分支，gitee一般为master，可在仓库首页查看
+all_minifier: true
