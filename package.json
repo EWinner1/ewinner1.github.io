@@ -6,7 +6,7 @@
     "build": "hexo generate",
     "clean": "hexo clean",
     "deploy": "hexo deploy",
-    "server": "hexo server -o"
+    "server": "hexo server --port 52520 -o"
   },
   "hexo": {
     "version": "6.3.0"
@@ -23,7 +23,9 @@
     "hexo-renderer-marked": "^6.0.0",
     "hexo-renderer-stylus": "^2.1.0",
     "hexo-server": "^3.0.0",
-    "hexo-theme-landscape": "^0.0.3",
     "hexo-theme-redefine": "^1.2.3"
+  },
+  "devDependencies": {
+    "hexo": "^6.3.0"
   }
 }
