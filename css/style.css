@@ -4896,6 +4896,8 @@ pre .deletion {
   margin-bottom: 1rem;
 }
 .page-template-container .friends-link-container .friends-link-list .friends-link-item {
+  width: 32% !important;
+  margin-left: 1% !important;
   box-sizing: border-box;
   position: relative;
   float: left;
@@ -4903,6 +4905,12 @@ pre .deletion {
   cursor: pointer;
   height: 82px;
   padding-bottom: 16px;
+}
+.page-template-container .friends-link-container .friends-link-list .friends-link-item:nth-child(odd) {
+  padding-right: 0 !important;
+}
+.page-template-container .friends-link-container .friends-link-list .friends-link-item:nth-child(even) {
+  padding-left: 0 !important;
 }
 @media (max-width: 780px) {
   .page-template-container .friends-link-container .friends-link-list .friends-link-item {
