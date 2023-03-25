@@ -1,0 +1,14 @@
+- name: redefine doc
+  link: https://redefine-docs.ohevan.com/docs/intro
+  description: 一个好看的主题
+  avatar: https://evan.beee.top/avatar.png
+
+- name: 树形图生成器
+  link: https://tree.nathanfriend.io
+  describtion: 一个代码树形图生成器
+  avatar: https://tree.nathanfriend.io/favicon-32x32.png
+
+- name: 清华大学镜像站
+  link: https://mirror.tuna.tsinghua.edu.cn
+  describtion: 清华大学镜像站
+  avatar: https://mirror.tuna.tsinghua.edu.cn/static/img/logo-white.png

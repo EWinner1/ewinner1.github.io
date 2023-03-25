@@ -86,6 +86,9 @@ custom: # custom font for the whole site
       enable: true
       font_family: "Source Code Pro" # the font family name of the url below
       font_url: "https://adobe-fonts.github.io/source-code-pro/" # The url to the font stylesheet file (css)
+  formats: # custom font styles for the whole site
+    font_size: 16px # font size
+    line_height: 1.5 # line height
 
 # ---------------------------------------------------------------------------------------
 # Social contact link
@@ -113,6 +116,13 @@ menu: #you can customize, i18n files are in the theme's languages folder. fa-reg
   Status:
     path: https://status.evanluo.top/
     icon: fa-regular fa-chart-bar
+  Links:
+    icon: fa-regular fa-link
+    submenus:
+      redefine doc: https://redefine-docs.ohevan.com/docs/intro
+  Tools:
+    path: /links
+    icon: fa-regular fa-wrench
   # About:
   #   icon: fa-regular fa-user
   #   submenus:
@@ -120,12 +130,6 @@ menu: #you can customize, i18n files are in the theme's languages folder. fa-reg
   #     Github: https://github.com/EvanNotFound/hexo-theme-redefine
   #     Blog: https://ohevan.com
   #     Friends: /friends
-  # Links:
-  #   icon: fa-regular fa-link
-  #   submenus:
-  #     Link1: /link1
-  #     Link2: /link2
-  #     Link3: /link3
 
   # ...... # you can add more
 
@@ -249,7 +253,7 @@ comment:
 # Friend Links page
 # ---------------------------------------------------------------------------------------
 friend_links:
-  columns: 2 # number of columns. 2 or 3
+  columns: 3 # number of columns. 2 or 3
 
 # ---------------------------------------------------------------------------------------
 # Tags Page
@@ -354,10 +358,3 @@ plugins:
   mermaid: # Mermaid JS
     enable: false # enable mermaid or not
     version: "9.3.0" # default v9.3.0
-
-# ---------------------------------------------------------------------------------------
-# Redefine Theme version (DELETE THIS PART IN YOUR _config.redefine.yml)
-# Please go to github to update the latest version frequently
-# Github: https://github.com/EvanNotFound/hexo-theme-redefine
-# ---------------------------------------------------------------------------------------
-version: 1.2.2 #DELETE THIS LINE IN YOUR _config.redefine.yml
