@@ -51,15 +51,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Network Tools</title>
-    <url>/2023/03/24/Network-Tools/</url>
-    <content><![CDATA[<h1 id="MyTools"><a href="#MyTools" class="headerlink" title="MyTools"></a>MyTools</h1><p>挺好用的代码<a class="link"   href="https://tree.nathanfriend.io/" >树形图生成器 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-]]></content>
-      <categories>
-        <category>Tools</category>
-      </categories>
-  </entry>
-  <entry>
     <title>常用写作模块</title>
     <url>/2023/03/25/WritingModules/</url>
     <content><![CDATA[<h1 id="大号提示块"><a href="#大号提示块" class="headerlink" title="大号提示块"></a>大号提示块</h1><div class="highlight-container" data-rel="Markdown"><figure class="iseeu highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% notel default 信息 %&#125;</span><br><span class="line">换行测试</span><br><span class="line">换行测试</span><br><span class="line">换行测试</span><br><span class="line">&#123;% endnotel %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% notel blue 提示 %&#125;</span><br><span class="line">换行测试</span><br><span class="line">换行测试</span><br><span class="line">换行测试</span><br><span class="line">&#123;% endnotel %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% notel red 自定义标题 %&#125;</span><br><span class="line">换行测试</span><br><span class="line">换行测试</span><br><span class="line">换行测试</span><br><span class="line">&#123;% endnotel %&#125;</span><br></pre></td></tr></table></figure></div>
@@ -128,7 +119,7 @@
 <h1 id="折叠模块"><a href="#折叠模块" class="headerlink" title="折叠模块"></a>折叠模块</h1><div class="highlight-container" data-rel="Markdown"><figure class="iseeu highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% folding [颜色]::[标题] %&#125;</span><br><span class="line">需要写的内容</span><br><span class="line">&#123;% endfolding %&#125;</span><br></pre></td></tr></table></figure></div>
 
 <ul>
-<li><code>[颜色]</code>:<code>yellow, blue, green, red, orange, pink, cyan, white, black, gray</code><br>效果<details class="[颜色]"><summary><i class="fa-solid fa-chevron-right"></i>[标题] </summary>
+<li><code>[颜色]</code>:<code>yellow, blue, green, red, orange, pink, cyan, white, black, gray</code><br>效果<details class="[颜色]" data-header-exclude><summary><i class="fa-solid fa-chevron-right"></i>[标题] </summary>
               <div class='content'>
               <p>需要写的内容</p>
               </div>
@@ -145,6 +136,15 @@
 ]]></content>
       <categories>
         <category>Blog</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Network Tools</title>
+    <url>/2023/03/24/Network-Tools/</url>
+    <content><![CDATA[<h1 id="MyTools"><a href="#MyTools" class="headerlink" title="MyTools"></a>MyTools</h1><p>挺好用的代码<a class="link"   href="https://tree.nathanfriend.io/" >树形图生成器 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+]]></content>
+      <categories>
+        <category>Tools</category>
       </categories>
   </entry>
   <entry>
