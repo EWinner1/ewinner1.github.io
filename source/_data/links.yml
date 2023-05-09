@@ -17,3 +17,43 @@
   link: https://xiayunquan.gitee.io/blog/tools/
   describtion: Tools web
   avatar: https://xiayunquan.gitee.io/medias/logo.png
+
+- name: 阿里云原生应用脚手架
+  link: https://start.aliyun.com/
+  describtion: spring boot镜像
+  avatar: https://start.aliyun.com/images/aliyun-icon.png
+
+- name: 阿里云仓库服务
+  link: https://developer.aliyun.com/mvn/guide
+  describtion: 仓库服务镜像
+  avatar: https://start.aliyun.com/images/aliyun-icon.png
+
+- name: 腾讯云-开发者社区-angular
+  link: https://cloud.tencent.com/developer/section/1489504
+  describtion: 仓库服务镜像
+  avatar: /images/TencentCloud.png
+
+- name: 未读代码
+  link: https://www.wdbyte.com/
+  describtion: 未读代码
+  avatar: https://www.wdbyte.com/static/fav.png
+
+- name: Free Exam
+  link: https://www.examtopics.com/
+  describtion: Free Exam
+  avatar: https://www.examtopics.com/assets/images/et/favicon/favicon-32x32.png
+
+- name: Microsoft 技术文档
+  link: https://learn.microsoft.com/zh-cn/docs/
+  describtion: Microsoft 技术文档
+  avatar: https://learn.microsoft.com/favicon.ico
+
+- name: Microsoft .Net
+  link: https://learn.microsoft.com/zh-cn/training/dotnet/
+  describtion: Microsoft .Net
+  avatar: https://learn.microsoft.com/favicon.ico
+
+- name: Microsoft learn
+  link: https://learn.microsoft.com/zh-cn/
+  describtion: Microsoft learn
+  avatar: https://learn.microsoft.com/favicon.ico
