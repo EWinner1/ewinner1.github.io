@@ -5,7 +5,7 @@ Global.initUtils = () => {
     html_root_dom: document.querySelector("html"),
     pageContainer_dom: document.querySelector(".page-container"),
     pageTop_dom: document.querySelector(".main-content-header"),
-    firstScreen_dom: document.querySelector(".home-banner-container"),
+    homeBanner_dom: document.querySelector(".home-banner-container"),
     scrollProgressBar_dom: document.querySelector(".scroll-progress-bar"),
     pjaxProgressBar_dom: document.querySelector(".pjax-progress-bar"),
     pjaxProgressIcon_dom: document.querySelector(".pjax-progress-icon"),
@@ -66,6 +66,21 @@ Global.initUtils = () => {
 
         // navbar shrink
         navbarShrink.init();
+
+        // scroll blur
+        if (Global.theme_config.home_banner.style === "fixed") {
+          const blurElement = document.querySelector(".home-banner-background");
+          const viewHeight = window.innerHeight;
+          const scrollY = window.scrollY || window.pageYOffset;
+          const quarterViewHeight = viewHeight / 4;
+          const blurValue =
+            scrollY >= quarterViewHeight
+              ? Math.min((scrollY - quarterViewHeight) / 50, 15)
+              : 0;
+          try {
+            blurElement.style.webkitFilter = `blur(${blurValue}px)`;
+          } catch (e) {}
+        }
 
         // auto hide tools
         var y = window.pageYOffset;
@@ -239,8 +254,13 @@ Global.initUtils = () => {
       this.goComment_dom = document.querySelector(".go-comment");
       if (this.goComment_dom) {
         this.goComment_dom.addEventListener("click", () => {
-          document.querySelector("#comment-anchor").scrollIntoView({
-            behavior: "smooth",
+          const target = document.querySelector("#comment-anchor");
+          const offset = target.getBoundingClientRect().top + window.scrollY;
+          window.anime({
+            targets: document.scrollingElement,
+            duration: 500,
+            easing: 'linear',
+            scrollTop: offset - 10
           });
         });
       }
@@ -253,14 +273,14 @@ Global.initUtils = () => {
     },
 
     // init first screen height
-    initFirstScreenHeight() {
-      this.firstScreen_dom &&
-        (this.firstScreen_dom.style.height = this.innerHeight + "px");
+    inithomeBannerHeight() {
+      this.homeBanner_dom &&
+        (this.homeBanner_dom.style.height = this.innerHeight + "px");
     },
 
     // init page height handle
     initPageHeightHandle() {
-      if (this.firstScreen_dom) return;
+      if (this.homeBanner_dom) return;
       const temp_h1 = this.getElementHeight(".main-content-header");
       const temp_h2 = this.getElementHeight(".main-content-body");
       const temp_h3 = this.getElementHeight(".main-content-footer");
@@ -501,7 +521,7 @@ Global.initUtils = () => {
   Global.utils.initPageHeightHandle();
 
   // init first screen height
-  Global.utils.initFirstScreenHeight();
+  Global.utils.inithomeBannerHeight();
 
   // big image viewer handle
   Global.utils.imageViewer();
