@@ -1,59 +1,66 @@
-- name: redefine doc
-  link: https://redefine-docs.ohevan.com/docs/intro
-  description: 一个好看的主题
-  avatar: https://evan.beee.top/avatar.png
+# - links_category: Elites
+#   has_thumbnail: true
+#   list:
+#     - name: EvanNotFound's Blog
+#       link: https://ohevan.com
+#       description: 用香港记者的速度更新文章
+#       avatar: https://evan.beee.top/avatar.png
+#       thumbnail: https://img1.imgtp.com/2023/06/19/Jegvz84P.png # has_thumbnail 为 true 时才需要
 
-- name: 树形图生成器
-  link: https://tree.nathanfriend.io
-  describtion: 一个代码树形图生成器
-  avatar: https://tree.nathanfriend.io/favicon-32x32.png
+- links_category: Normal
+  has_thumbnail: false
+  list:
+    - name: redefine doc
+      link: https://redefine-docs.ohevan.com/docs/intro
+      description: 一个好看的主题
+      avatar: https://evan.beee.top/avatar.png
 
-- name: 清华大学镜像站
-  link: https://mirror.tuna.tsinghua.edu.cn
-  describtion: 清华大学镜像站
-  avatar: https://mirror.tuna.tsinghua.edu.cn/static/img/logo-white.png
+    - name: 树形图生成器
+      link: https://tree.nathanfriend.io
+      describtion: 一个代码树形图生成器
+      avatar: https://tree.nathanfriend.io/favicon-32x32.png
 
-- name: Tools
-  link: https://xiayunquan.gitee.io/blog/tools/
-  describtion: Tools web
-  avatar: https://xiayunquan.gitee.io/medias/logo.png
+    - name: 清华大学镜像站
+      link: https://mirror.tuna.tsinghua.edu.cn
+      describtion: 清华大学镜像站
+      avatar: https://mirror.tuna.tsinghua.edu.cn/static/img/logo-white.png
 
-- name: 阿里云原生应用脚手架
-  link: https://start.aliyun.com/
-  describtion: spring boot镜像
-  avatar: https://start.aliyun.com/images/aliyun-icon.png
+    - name: 阿里云原生应用脚手架
+      link: https://start.aliyun.com/
+      describtion: spring boot镜像
+      avatar: https://start.aliyun.com/images/aliyun-icon.png
 
-- name: 阿里云仓库服务
-  link: https://developer.aliyun.com/mvn/guide
-  describtion: 仓库服务镜像
-  avatar: https://start.aliyun.com/images/aliyun-icon.png
+    - name: 阿里云仓库服务
+      link: https://developer.aliyun.com/mvn/guide
+      describtion: 仓库服务镜像
+      avatar: https://start.aliyun.com/images/aliyun-icon.png
 
-- name: 腾讯云-开发者社区-angular
-  link: https://cloud.tencent.com/developer/section/1489504
-  describtion: 仓库服务镜像
-  avatar: /images/TencentCloud.png
+    - name: 腾讯云-开发者社区-angular
+      link: https://cloud.tencent.com/developer/section/1489504
+      describtion: 仓库服务镜像
+      avatar: /images/TencentCloud.png
 
-- name: 未读代码
-  link: https://www.wdbyte.com/
-  describtion: 未读代码
-  avatar: https://www.wdbyte.com/static/fav.png
+    - name: 未读代码
+      link: https://www.wdbyte.com/
+      describtion: 未读代码
+      avatar: https://www.wdbyte.com/static/fav.png
 
-- name: Free Exam
-  link: https://www.examtopics.com/
-  describtion: Free Exam
-  avatar: https://www.examtopics.com/assets/images/et/favicon/favicon-32x32.png
+    - name: Free Exam
+      link: https://www.examtopics.com/
+      describtion: Free Exam
+      avatar: https://www.examtopics.com/assets/images/et/favicon/favicon-32x32.png
 
-- name: Microsoft 技术文档
-  link: https://learn.microsoft.com/zh-cn/docs/
-  describtion: Microsoft 技术文档
-  avatar: https://learn.microsoft.com/favicon.ico
+    - name: Microsoft 技术文档
+      link: https://learn.microsoft.com/zh-cn/docs/
+      describtion: Microsoft 技术文档
+      avatar: https://learn.microsoft.com/favicon.ico
 
-- name: Microsoft .Net
-  link: https://learn.microsoft.com/zh-cn/training/dotnet/
-  describtion: Microsoft .Net
-  avatar: https://learn.microsoft.com/favicon.ico
+    - name: Microsoft .Net
+      link: https://learn.microsoft.com/zh-cn/training/dotnet/
+      describtion: Microsoft .Net
+      avatar: https://learn.microsoft.com/favicon.ico
 
-- name: Microsoft learn
-  link: https://learn.microsoft.com/zh-cn/
-  describtion: Microsoft learn
-  avatar: https://learn.microsoft.com/favicon.ico
+    - name: Microsoft learn
+      link: https://learn.microsoft.com/zh-cn/
+      describtion: Microsoft learn
+      avatar: https://learn.microsoft.com/favicon.ico

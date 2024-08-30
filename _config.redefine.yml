@@ -185,16 +185,16 @@ navbar:
     Archives:
       path: /archives
       icon: fa-regular fa-archive # can be empty
-    Status:
-      path: https://status.evanluo.top/
-      icon: fa-regular fa-chart-bar
+    # Status:
+    #   path: https://status.evanluo.top/
+    #   icon: fa-regular fa-chart-bar
     Links:
       icon: fa-regular fa-link
       submenus:
         redefine doc: https://redefine-docs.ohevan.com
         hexo doc: https://hexo.io/zh-cn/docs
     Tools:
-      path: /links
+      path: /mytools
       icon: fa-regular fa-wrench
     # About:
     #   icon: fa-regular fa-user
