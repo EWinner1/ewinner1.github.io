@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>Augular</title>
+    <url>/2023/03/24/Augular/</url>
+    <content><![CDATA[<h1 id="Angular"><a href="#Angular" class="headerlink" title="Angular"></a>Angular</h1><h2 id="较好的项目结构"><a href="#较好的项目结构" class="headerlink" title="较好的项目结构"></a>较好的项目结构</h2><div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">.</span><br><span class="line">├── PageA</span><br><span class="line">│   ├── Components</span><br><span class="line">│   └── shared</span><br><span class="line">│       ├── resolves</span><br><span class="line">│       │   └── resolveA</span><br><span class="line">│       └── services</span><br><span class="line">│           └── service</span><br><span class="line">└── PageB</span><br><span class="line">    └── ···</span><br></pre></td></tr></table></figure></div>
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>Angular</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Config a new theme in github page</title>
+    <url>/2023/03/19/Config-a-new-theme-in-github-page/</url>
+    <content><![CDATA[<h1 id="选择一个你喜欢的主题"><a href="#选择一个你喜欢的主题" class="headerlink" title="选择一个你喜欢的主题"></a>选择一个你喜欢的主题</h1><p>安装一个新的主题首先当然是选择一个你喜欢的样式, 对于 hexo, 你可以在<a class="link"   href="https://hexo.io/themes/" >这里 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>寻找到你喜欢的主题的样式, 这里选择的是<a class="link"   href="https://github.com/EvanNotFound/hexo-theme-redefine" >Redefine theme <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>, 其具有不错的样式和中文文档。</p>
+<h1 id="开始安装"><a href="#开始安装" class="headerlink" title="开始安装"></a>开始安装</h1><p>推荐使用<code>npm</code>进行安装。</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">npm install hexo-theme-redefine@latest</span><br></pre></td></tr></table></figure></div>
+
+
+  <div class="note-large blue">
+    <div class="notel-title rounded-t-lg p-3 font-bold text-lg flex flex-row gap-2 items-center">
+      <p>如何更新？</p>
+
+    </div>
+    <div class="notel-content">
+      <p>我们可以通过<code>npm</code>安装最新版本</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">npm install hexo-theme-redefine@latest</span><br></pre></td></tr></table></figure></div>
+
+<p>需要注意的是在进行更新后要检查<code>\node_modules\hexo-theme-redefine\_config.yml</code>和当前主题的配置文件<code>_config.redefine.yml</code>的关键信息是否一致, 否则可能导致构建错误。</p>
+
+    </div>
+  </div>
+<p>在安装完成后, 要将<code>_config.yml</code>中的<code>theme: xxxx</code>改为<code>theme: redefine</code></p>
+<h1 id="开始配置"><a href="#开始配置" class="headerlink" title="开始配置"></a>开始配置</h1><p>完整的配置方案请点击<a class="link"   href="https://redefine-docs.ohevan.com/docs/intro" >这里 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>, 这里只简单的介绍一些基本的配置。</p>
+<h2 id="base-info"><a href="#base-info" class="headerlink" title="base_info"></a>base_info</h2><div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">base_info:</span><br><span class="line">  title: Theme Redefine # 网站标题</span><br><span class="line">  author: The Redefine Team # 作者名称</span><br><span class="line">  url: https://xxxx # Base URL</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="style"><a href="#style" class="headerlink" title="style"></a>style</h2><h3 id="primary-color"><a href="#primary-color" class="headerlink" title="primary_color"></a>primary_color</h3><p>设置网站的主题色</p>
+<h3 id="avatar"><a href="#avatar" class="headerlink" title="avatar"></a>avatar</h3><p>设置作者的头像, 可以使用外链或者本地链接</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">avatar: /images/avatar.svg</span><br><span class="line">avatar: https://raw.githubusercontent.com/EvanNotFound/hexo-theme-redefine/main/source/images/avatar.svg</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="favicon"><a href="#favicon" class="headerlink" title="favicon"></a>favicon</h3><p>设置网站显示在 Title 的 logo, 也可以使用外链或者本地链接</p>
+<h3 id="right-side-width"><a href="#right-side-width" class="headerlink" title="right_side_width"></a>right_side_width</h3><p>设置右侧目录模块的宽度。一般情况下, 你无需修改。如需设置, 请保持单位为<code>px</code></p>
+<h3 id="first-screen"><a href="#first-screen" class="headerlink" title="first_screen"></a>first_screen</h3><p>开启后将显示在网站首页。配置为<code>enable</code>开启首屏<br><code>background_image</code>首屏背景图片, 可使用本地图片或图片外链 URL</p>
+
+  <div class="note-large blue">
+    <div class="notel-title rounded-t-lg p-3 font-bold text-lg flex flex-row gap-2 items-center">
+      <p>Notice</p>
+
+    </div>
+    <div class="notel-content">
+      <p>（如果你的 Hexo 博客的网址位于子目录, 比如 <a class="link"   href="https://example.com/blog" >https://example.com/blog <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>, 请使用 图片外链 URL）</p>
+
+    </div>
+  </div>
+
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">first_screen:</span><br><span class="line">    enable: true</span><br><span class="line">    background_image:</span><br><span class="line">      light: /images/wallhaven-wqery6-light.webp # 为亮色模式的背景图, 使用相对路径或者外链(如果网址位于子目录, 请使用外链)</span><br><span class="line">      dark: /images/wallhaven-wqery6-dark.webp # 为暗色模式的背景图, 使用相对路径或者外链(如果网址位于子目录, 请使用外链)</span><br><span class="line">    title_color:</span><br><span class="line">	  font_sizes: # 设定首屏的字体大小</span><br><span class="line">      light: &quot;#fff&quot; # 首屏标题的文字颜色 (light mode)</span><br><span class="line">      dark: &quot;#d1d1b6&quot; # 首屏标题的文字颜色 (dark mode)</span><br><span class="line">    font_sizes:</span><br><span class="line">      title: 2.8rem # 设定首屏标题的字体大小</span><br><span class="line">      subtitle: 1.5rem # 设定首屏副标题的字体大小</span><br><span class="line">    line_height: 1.2 # 首屏标题字体高度</span><br><span class="line">    title: Theme Redefine # the title in the middle of the first screen. HTML supported (e.g. svg html code of your logo)</span><br><span class="line">    subtitle: # 副标题（有打字效果）</span><br><span class="line">      enable: false</span><br><span class="line">      list: [] # 副标题的句子内容, 可以填写多个句子, 比如 [&#x27;This is the first sentence&#x27;, &#x27;This is the second one&#x27;]</span><br><span class="line">    custom_font: # 首屏自定义字体</span><br><span class="line">      enable: false</span><br><span class="line">      font_family: # 字体名称</span><br><span class="line">      font_url: # 到字体 css 样式表的链接, 比如 Google Fonts 的 https://fonts.googleapis.com/css2?family=Roboto&amp;display=swap</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="scroll"><a href="#scroll" class="headerlink" title="scroll:"></a>scroll:</h3><div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">progress_bar: # reading progress bar</span><br><span class="line">	enable: true</span><br><span class="line">percent: # reading progress percent</span><br><span class="line">    enable: true</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="Custom"><a href="#Custom" class="headerlink" title="Custom"></a>Custom</h2><div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">custom: # custom font for the whole site</span><br><span class="line">font:</span><br><span class="line">    chinese: # 自定义中文字体</span><br><span class="line">		enable: false</span><br><span class="line">		font_family: # 字体名称</span><br><span class="line">     	font_url: # 字体URL</span><br><span class="line">    english: # custom font for English</span><br><span class="line">		enable: false</span><br><span class="line">		font_family: # 字体名称</span><br><span class="line">      	font_url: # 字体URL</span><br></pre></td></tr></table></figure></div>
+]]></content>
+      <categories>
+        <category>Github pages</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>常用写作模块</title>
+    <url>/2023/03/25/WritingModules/</url>
+    <content><![CDATA[<h1 id="大号提示块"><a href="#大号提示块" class="headerlink" title="大号提示块"></a>大号提示块</h1><div class="highlight-container" data-rel="Markdown"><figure class="iseeu highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% notel default 信息 %&#125;</span><br><span class="line">换行测试</span><br><span class="line">换行测试</span><br><span class="line">换行测试</span><br><span class="line">&#123;% endnotel %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% notel blue 提示 %&#125;</span><br><span class="line">换行测试</span><br><span class="line">换行测试</span><br><span class="line">换行测试</span><br><span class="line">&#123;% endnotel %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% notel red 自定义标题 %&#125;</span><br><span class="line">换行测试</span><br><span class="line">换行测试</span><br><span class="line">换行测试</span><br><span class="line">&#123;% endnotel %&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>效果如下</p>
+
+  <div class="note-large default">
+    <div class="notel-title rounded-t-lg p-3 font-bold text-lg flex flex-row gap-2 items-center">
+      <p>信息</p>
+
+    </div>
+    <div class="notel-content">
+      <p>换行测试<br>换行测试<br>换行测试</p>
+
+    </div>
+  </div>
+
+
+  <div class="note-large blue">
+    <div class="notel-title rounded-t-lg p-3 font-bold text-lg flex flex-row gap-2 items-center">
+      <p>提示</p>
+
+    </div>
+    <div class="notel-content">
+      <p>换行测试<br>换行测试<br>换行测试</p>
+
+    </div>
+  </div>
+
+
+  <div class="note-large red">
+    <div class="notel-title rounded-t-lg p-3 font-bold text-lg flex flex-row gap-2 items-center">
+      <p>自定义标题</p>
+
+    </div>
+    <div class="notel-content">
+      <p>换行测试<br>换行测试<br>换行测试</p>
+
+    </div>
+  </div>
+
+<h1 id="小号提示块"><a href="#小号提示块" class="headerlink" title="小号提示块"></a>小号提示块</h1><div class="highlight-container" data-rel="Markdown"><figure class="iseeu highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% note [样式/颜色] [可选: 自定义图标] %&#125;</span><br><span class="line">笔记内容</span><br><span class="line">&#123;% endnote %&#125;</span><br></pre></td></tr></table></figure></div>
+
+<ul>
+<li>[样式&#x2F;颜色] 可以为 success default primary info warning danger tip question 以及 blue red 等颜色</li>
+<li>[可选: 自定义图标] 选项可选，请填写 Fontawsome 的图标名称后半部分，比如 fa-image</li>
+</ul>
+<p>效果如下</p>
+
+  <div class="note p-4 mb-4 rounded-small default">
+    <p>默认 提示块标签</p>
+
+  </div>
+
+
+  <div class="note p-4 mb-4 rounded-small default">
+    <p>default 提示块标签</p>
+
+  </div>
+
+
+  <div class="note p-4 mb-4 rounded-small primary">
+    <p>primary 提示块标签</p>
+
+  </div>
+
+
+  <div class="note p-4 mb-4 rounded-small success">
+    <p>success 提示块标签</p>
+
+  </div>
+
+
+  <div class="note p-4 mb-4 rounded-small info">
+    <p>info 提示块标签</p>
+
+  </div>
+
+
+  <div class="note p-4 mb-4 rounded-small warning">
+    <p>warning 提示块标签</p>
+
+  </div>
+
+
+  <div class="note p-4 mb-4 rounded-small danger">
+    <p>danger 提示块标签</p>
+
+  </div>
+
+
+  <div class="note p-4 mb-4 rounded-small red icon-padding">
+    <i class="note-icon fa-solid fa-bolt"></i><p>自定义提示块标签</p>
+
+  </div>
+
+<h1 id="Buttons-按钮模块"><a href="#Buttons-按钮模块" class="headerlink" title="Buttons 按钮模块"></a>Buttons 按钮模块</h1><div class="highlight-container" data-rel="Markdown"><figure class="iseeu highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% btn [可选大小]::[名称]::[url]::[可选图标] %&#125;</span><br></pre></td></tr></table></figure></div>
+
+<ul>
+<li>不设置任何参数的 <a class="button " href='/' title='按钮'>按钮</a> 适合融入段落中。</li>
+</ul>
+<p>regular 按钮适合独立于段落之外：</p>
+<a class="button  regular" href='https://www.ohevan.com' title='示例博客'><i class='fa-solid fa-play-circle'></i> 示例博客</a>
+
+<a class="button  regular" href='https://www.ohevan.com' title='示例博客'><i class='fa-solid fa-play-circle'></i> 示例博客</a>
+
+<p>large 按钮更具有强调作用，建议搭配 center 使用：</p>
+<a class="button  center large" href='https://redefine-docs.ohevan.com' title='开始使用'><i class='fa-solid fa-download'></i> 开始使用</a>
+
+<ul>
+<li><code>[可选大小]</code>:<code>center, regular, large, center large, center regular</code></li>
+<li><code>[可选图标]</code>:<a class="link"   href="https://fontawesome.com/search" >Fontawesome <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 图标名称，比如 fa-solid fa-house</li>
+</ul>
+<h1 id="折叠模块"><a href="#折叠模块" class="headerlink" title="折叠模块"></a>折叠模块</h1><div class="highlight-container" data-rel="Markdown"><figure class="iseeu highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% folding [颜色]::[标题] %&#125;</span><br><span class="line">需要写的内容</span><br><span class="line">&#123;% endfolding %&#125;</span><br></pre></td></tr></table></figure></div>
+
+<ul>
+<li><code>[颜色]</code>:<code>yellow, blue, green, red, orange, pink, cyan, white, black, gray</code><br>效果<details class="[颜色]" data-header-exclude><summary><i class="fa-solid fa-chevron-right"></i>[标题] </summary>
+              <div class='content'>
+              <p>需要写的内容</p>
+              </div>
+            </details></li>
+</ul>
+<h1 id="分栏模块"><a href="#分栏模块" class="headerlink" title="分栏模块"></a>分栏模块</h1><p>语法</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;% tabs 页面内不重复的ID %&#125;</span><br><span class="line">&lt;!-- tab 栏目1名称 --&gt;</span><br><span class="line">内容</span><br><span class="line">&lt;!-- endtab --&gt;</span><br><span class="line">&lt;!-- tab 栏目2名称 --&gt;</span><br><span class="line">内容</span><br><span class="line">&lt;!-- endtab --&gt;</span><br><span class="line">&#123;% endtabs %&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>效果如下</p>
+<div class="tabs" id="tab-first-unique-name"><ul class="nav-tabs"><li class="tab active"><a class="#first-unique-name-1">First Tab</a></li><li class="tab"><a class="#first-unique-name-2">Second Tab</a></li><li class="tab"><a class="#first-unique-name-3">Third Tab</a></li></ul><div class="tab-content"><div class="tab-pane active" id="first-unique-name-1"><p><strong>This is Tab 1.</strong></p></div><div class="tab-pane" id="first-unique-name-2"><p><strong>This is Tab 2.</strong></p>
+<p>This is Tab 2.</p></div><div class="tab-pane" id="first-unique-name-3"><p><strong>This is Tab 3.</strong></p>
+<p>This is Tab 3.</p>
+<p>This is Tab 3.</p></div></div></div>
+]]></content>
+      <categories>
+        <category>Blog</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Network Tools</title>
+    <url>/2023/03/24/Network-Tools/</url>
+    <content><![CDATA[<h1 id="MyTools"><a href="#MyTools" class="headerlink" title="MyTools"></a>MyTools</h1><p>挺好用的代码<a class="link"   href="https://tree.nathanfriend.io/" >树形图生成器 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+]]></content>
+      <categories>
+        <category>Tools</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2023/03/01/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a class="link"   href="https://hexo.io/" >Hexo <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><br>This is your very first post. Check <a class="link"   href="https://hexo.io/docs/" >documentation <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> for more info.<br>If you get any problems when using Hexo, you can find the answer in <a class="link"   href="https://hexo.io/docs/troubleshooting.html" >troubleshooting <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> or you can ask me on <a class="link"   href="https://github.com/hexojs/hexo/issues" >GitHub <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="初始化网站"><a href="#初始化网站" class="headerlink" title="初始化网站"></a>初始化网站</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo init [folder]</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="创建一个新的-Blog"><a href="#创建一个新的-Blog" class="headerlink" title="创建一个新的 Blog"></a>创建一个新的 Blog</h3><p>如果标题包含空格，使用引号将其包裹起来。</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure></div>
+
+<p>More info: <a class="link"   href="https://hexo.io/docs/writing.html" >Writing <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure></div>
+
+<p>More info: <a class="link"   href="https://hexo.io/docs/server.html" >Server <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<h3 id="清理可能存在的编译缓存问题"><a href="#清理可能存在的编译缓存问题" class="headerlink" title="清理可能存在的编译缓存问题"></a>清理可能存在的编译缓存问题</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo clean</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="编译生成静态文件"><a href="#编译生成静态文件" class="headerlink" title="编译生成静态文件"></a>编译生成静态文件</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure></div>
+
+<p>More info: <a class="link"   href="https://hexo.io/docs/generating.html" >Generating <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<h3 id="部署到-github"><a href="#部署到-github" class="headerlink" title="部署到 github"></a>部署到 github</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure></div>
+
+<p>More info: <a class="link"   href="https://hexo.io/docs/one-command-deployment.html" >Deployment <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+]]></content>
+      <categories>
+        <category>Blog</category>
+      </categories>
+  </entry>
+</search>
