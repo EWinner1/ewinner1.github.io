@@ -3,7 +3,7 @@
   <entry>
     <title>Config a new theme in github page</title>
     <url>/2023/03/19/Config-a-new-theme-in-github-page/</url>
-    <content><![CDATA[<h1 id="选择一个你喜欢的主题"><a href="#选择一个你喜欢的主题" class="headerlink" title="选择一个你喜欢的主题"></a>选择一个你喜欢的主题</h1><p>安装一个新的主题首先当然是选择一个你喜欢的样式, 对于 hexo, 你可以在<a class="link"   href="https://hexo.io/themes/" >这里 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>寻找到你喜欢的主题的样式, 这里选择的是<a class="link"   href="https://github.com/EvanNotFound/hexo-theme-redefine" >Redefine theme <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>, 其具有不错的样式和中文文档。</p>
+    <content><![CDATA[<h1 id="选择一个你喜欢的主题"><a href="#选择一个你喜欢的主题" class="headerlink" title="选择一个你喜欢的主题"></a>选择一个你喜欢的主题</h1><p>安装一个新的主题首先当然是选择一个你喜欢的样式, 对于 hexo, 你可以在<a class="link"   href="https://hexo.io/themes/" >这里</a>寻找到你喜欢的主题的样式, 这里选择的是<a class="link"   href="https://github.com/EvanNotFound/hexo-theme-redefine" >Redefine theme</a>, 其具有不错的样式和中文文档。</p>
 <h1 id="开始安装"><a href="#开始安装" class="headerlink" title="开始安装"></a>开始安装</h1><p>推荐使用<code>npm</code>进行安装。</p>
 <div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">npm install hexo-theme-redefine@latest</span><br></pre></td></tr></table></figure></div>
 
@@ -22,7 +22,7 @@
     </div>
   </div>
 <p>在安装完成后, 要将<code>_config.yml</code>中的<code>theme: xxxx</code>改为<code>theme: redefine</code></p>
-<h1 id="开始配置"><a href="#开始配置" class="headerlink" title="开始配置"></a>开始配置</h1><p>完整的配置方案请点击<a class="link"   href="https://redefine-docs.ohevan.com/docs/intro" >这里 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>, 这里只简单的介绍一些基本的配置。</p>
+<h1 id="开始配置"><a href="#开始配置" class="headerlink" title="开始配置"></a>开始配置</h1><p>完整的配置方案请点击<a class="link"   href="https://redefine-docs.ohevan.com/docs/intro" >这里</a>, 这里只简单的介绍一些基本的配置。</p>
 <h2 id="base-info"><a href="#base-info" class="headerlink" title="base_info"></a>base_info</h2><div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">base_info:</span><br><span class="line">  title: Theme Redefine # 网站标题</span><br><span class="line">  author: The Redefine Team # 作者名称</span><br><span class="line">  url: https://xxxx # Base URL</span><br></pre></td></tr></table></figure></div>
 
 <h2 id="style"><a href="#style" class="headerlink" title="style"></a>style</h2><h3 id="primary-color"><a href="#primary-color" class="headerlink" title="primary_color"></a>primary_color</h3><p>设置网站的主题色</p>
@@ -39,7 +39,7 @@
 
     </div>
     <div class="notel-content">
-      <p>（如果你的 Hexo 博客的网址位于子目录, 比如 <a class="link"   href="https://example.com/blog" >https://example.com/blog <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>, 请使用 图片外链 URL）</p>
+      <p>（如果你的 Hexo 博客的网址位于子目录, 比如 <a class="link"   href="https://example.com/blog" >https://example.com/blog</a>, 请使用 图片外链 URL）</p>
 
     </div>
   </div>
@@ -57,7 +57,7 @@
   <entry>
     <title>Network Tools</title>
     <url>/2023/03/24/Network-Tools/</url>
-    <content><![CDATA[<h1 id="MyTools"><a href="#MyTools" class="headerlink" title="MyTools"></a>MyTools</h1><p>挺好用的代码<a class="link"   href="https://tree.nathanfriend.io/" >树形图生成器 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+    <content><![CDATA[<h1 id="MyTools"><a href="#MyTools" class="headerlink" title="MyTools"></a>MyTools</h1><p>挺好用的代码<a class="link"   href="https://tree.nathanfriend.io/" >树形图生成器</a></p>
 ]]></content>
       <categories>
         <category>Tools</category>
@@ -187,7 +187,7 @@
 
 <ul>
 <li><code>[可选大小]</code>:<code>center, regular, large, center large, center regular</code></li>
-<li><code>[可选图标]</code>:<a class="link"   href="https://fontawesome.com/search" >Fontawesome <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 图标名称，比如 fa-solid fa-house</li>
+<li><code>[可选图标]</code>:<a class="link"   href="https://fontawesome.com/search" >Fontawesome</a> 图标名称，比如 fa-solid fa-house</li>
 </ul>
 <h1 id="折叠模块"><a href="#折叠模块" class="headerlink" title="折叠模块"></a>折叠模块</h1><div class="highlight-container" data-rel="Markdown"><figure class="iseeu highlight markdown"><table><tr><td class="code"><pre><span class="line">&#123;% folding [颜色]::[标题] %&#125;</span><br><span class="line">需要写的内容</span><br><span class="line">&#123;% endfolding %&#125;</span><br></pre></td></tr></table></figure></div>
 
@@ -214,7 +214,7 @@
   <entry>
     <title>frp Guidelines</title>
     <url>/2024/08/30/frp-Guidelines/</url>
-    <content><![CDATA[<h1 id="一、官方文档"><a href="#一、官方文档" class="headerlink" title="一、官方文档"></a>一、官方文档</h1><p><a class="link"   href="https://gofrp.org/docs/overview/" >概览 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+    <content><![CDATA[<h1 id="一、官方文档"><a href="#一、官方文档" class="headerlink" title="一、官方文档"></a>一、官方文档</h1><p><a class="link"   href="https://gofrp.org/docs/overview/" >概览</a></p>
 <h1 id="二、frp是什么？"><a href="#二、frp是什么？" class="headerlink" title="二、frp是什么？"></a>二、frp是什么？</h1><p><code>frp</code>是一个专注于内网穿透的高性能的反向代理应用，支持<code>TCP</code>、<code>UDP</code>、<code>HTTP</code>、<code>HTTPS</code>等多种协议。可以将内网服务以安全、便捷的方式通过具有公网<code>IP</code>节点的中转暴露到公网。</p>
 <h1 id="三、为什么使用frp？"><a href="#三、为什么使用frp？" class="headerlink" title="三、为什么使用frp？"></a>三、为什么使用frp？</h1><p>通过在具有公网IP的节点上部署<code>frp</code>服务端，可以轻松地将内网服务穿透到公网，同时提供诸多专业的功能特性，这包括：</p>
 <ul>
@@ -226,7 +226,7 @@
 <li>高度扩展性的服务端插件系统，方便结合自身需求进行功能扩展。</li>
 <li>服务端和客户端UI页面。</li>
 </ul>
-<h1 id="四、下载"><a href="#四、下载" class="headerlink" title="四、下载"></a>四、下载</h1><p><a class="link"   href="https://github.com/fatedier/frp/releases" >Releases · fatedier&#x2F;frp <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<h1 id="四、下载"><a href="#四、下载" class="headerlink" title="四、下载"></a>四、下载</h1><p><a class="link"   href="https://github.com/fatedier/frp/releases" >Releases · fatedier&#x2F;frp</a></p>
 <h1 id="五、工作原理"><a href="#五、工作原理" class="headerlink" title="五、工作原理"></a>五、工作原理</h1><p>frp主要由<strong>客户端(</strong><code>**frpc**</code><strong>)<strong>和</strong>服务端(</strong><code>**frps**</code>**)**组成，服务端通常部署在具有公网IP的机器上，客户端通常部署在需要穿透的内网服务所在的机器上。<br />内网服务由于没有公网IP，不能被非局域网内的其他用户访问。<br />用户通过访问服务端的<code>frps</code>，由<code>frp</code>负责根据请求的端口或其他信息将请求路由到对应的内网机器，从而实现通信。<br />在<code>frp</code>中一个代理对应一个需要暴露的内网服务。一个客户端支持同时配置多个代理。<br /><code>frp</code>支持多种代理类型来适配不同的使用场景。</p>
 <table>
 <thead>
@@ -815,7 +815,7 @@
 <td>连接服务端使用的代理地址</td>
 <td></td>
 <td></td>
-<td>格式为 {protocol}:&#x2F;&#x2F;user:<a class="link"   href="mailto:&#112;&#x61;&#x73;&#115;&#119;&#x64;&#x40;&#49;&#57;&#50;&#x2e;&#49;&#54;&#56;&#x2e;&#x31;&#46;&#49;&#50;&#x38;" >&#112;&#x61;&#x73;&#115;&#119;&#x64;&#x40;&#49;&#57;&#50;&#x2e;&#49;&#54;&#56;&#x2e;&#x31;&#46;&#49;&#50;&#x38; <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>:8080 protocol 目前支持 http、socks5、ntlm</td>
+<td>格式为 {protocol}:&#x2F;&#x2F;user:<a class="link"   href="mailto:&#x70;&#x61;&#x73;&#x73;&#x77;&#x64;&#64;&#x31;&#57;&#x32;&#x2e;&#49;&#54;&#x38;&#46;&#x31;&#46;&#49;&#50;&#56;" >&#x70;&#x61;&#x73;&#x73;&#x77;&#x64;&#64;&#x31;&#57;&#x32;&#x2e;&#49;&#54;&#x38;&#46;&#x31;&#46;&#49;&#50;&#56;</a>:8080 protocol 目前支持 http、socks5、ntlm</td>
 </tr>
 <tr>
 <td>log_file</td>
@@ -1195,6 +1195,32 @@
       </tags>
   </entry>
   <entry>
+    <title>Hello World</title>
+    <url>/2023/03/01/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a class="link"   href="https://hexo.io/" >Hexo</a><br>This is your very first post. Check <a class="link"   href="https://hexo.io/docs/" >documentation</a> for more info.<br>If you get any problems when using Hexo, you can find the answer in <a class="link"   href="https://hexo.io/docs/troubleshooting.html" >troubleshooting</a> or you can ask me on <a class="link"   href="https://github.com/hexojs/hexo/issues" >GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="初始化网站"><a href="#初始化网站" class="headerlink" title="初始化网站"></a>初始化网站</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo init [folder]</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="创建一个新的-Blog"><a href="#创建一个新的-Blog" class="headerlink" title="创建一个新的 Blog"></a>创建一个新的 Blog</h3><p>如果标题包含空格，使用引号将其包裹起来。</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure></div>
+
+<p>More info: <a class="link"   href="https://hexo.io/docs/writing.html" >Writing</a></p>
+<h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure></div>
+
+<p>More info: <a class="link"   href="https://hexo.io/docs/server.html" >Server</a></p>
+<h3 id="清理可能存在的编译缓存问题"><a href="#清理可能存在的编译缓存问题" class="headerlink" title="清理可能存在的编译缓存问题"></a>清理可能存在的编译缓存问题</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo clean</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="编译生成静态文件"><a href="#编译生成静态文件" class="headerlink" title="编译生成静态文件"></a>编译生成静态文件</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure></div>
+
+<p>More info: <a class="link"   href="https://hexo.io/docs/generating.html" >Generating</a></p>
+<h3 id="部署到-github"><a href="#部署到-github" class="headerlink" title="部署到 github"></a>部署到 github</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure></div>
+
+<p>More info: <a class="link"   href="https://hexo.io/docs/one-command-deployment.html" >Deployment</a></p>
+]]></content>
+      <categories>
+        <category>Blog</category>
+      </categories>
+  </entry>
+  <entry>
     <title>log4j</title>
     <url>/2024/08/30/log4j/</url>
     <content><![CDATA[<p>Log4j 是一种非常流行的日志框架，最新版本是 2.x。</p>
@@ -1222,31 +1248,5 @@
 <p>要打印日志，只需要按 Commons Logging 的写法写，不需要改动任何代码，就可以得到 Log4j 的日志输出，类似：</p>
 <div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">03-03 12:09:45.880 [main] INFO  com.itranswarp.learnjava.Main</span><br><span class="line">Start process...</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
 ]]></content>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2023/03/01/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a class="link"   href="https://hexo.io/" >Hexo <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><br>This is your very first post. Check <a class="link"   href="https://hexo.io/docs/" >documentation <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> for more info.<br>If you get any problems when using Hexo, you can find the answer in <a class="link"   href="https://hexo.io/docs/troubleshooting.html" >troubleshooting <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> or you can ask me on <a class="link"   href="https://github.com/hexojs/hexo/issues" >GitHub <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="初始化网站"><a href="#初始化网站" class="headerlink" title="初始化网站"></a>初始化网站</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo init [folder]</span><br></pre></td></tr></table></figure></div>
-
-<h3 id="创建一个新的-Blog"><a href="#创建一个新的-Blog" class="headerlink" title="创建一个新的 Blog"></a>创建一个新的 Blog</h3><p>如果标题包含空格，使用引号将其包裹起来。</p>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure></div>
-
-<p>More info: <a class="link"   href="https://hexo.io/docs/writing.html" >Writing <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure></div>
-
-<p>More info: <a class="link"   href="https://hexo.io/docs/server.html" >Server <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<h3 id="清理可能存在的编译缓存问题"><a href="#清理可能存在的编译缓存问题" class="headerlink" title="清理可能存在的编译缓存问题"></a>清理可能存在的编译缓存问题</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo clean</span><br></pre></td></tr></table></figure></div>
-
-<h3 id="编译生成静态文件"><a href="#编译生成静态文件" class="headerlink" title="编译生成静态文件"></a>编译生成静态文件</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure></div>
-
-<p>More info: <a class="link"   href="https://hexo.io/docs/generating.html" >Generating <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<h3 id="部署到-github"><a href="#部署到-github" class="headerlink" title="部署到 github"></a>部署到 github</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure></div>
-
-<p>More info: <a class="link"   href="https://hexo.io/docs/one-command-deployment.html" >Deployment <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-]]></content>
-      <categories>
-        <category>Blog</category>
-      </categories>
   </entry>
 </search>
