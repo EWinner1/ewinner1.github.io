@@ -9,7 +9,7 @@ excerpt: FRP内网穿透指南
 ---
 
 # 一、官方文档
-[概览](https://gofrp.org/docs/overview/)
+[frp中文概览](https://gofrp.org/zh-cn/docs/)
 # 二、frp是什么？
 `frp`是一个专注于内网穿透的高性能的反向代理应用，支持`TCP`、`UDP`、`HTTP`、`HTTPS`等多种协议。可以将内网服务以安全、便捷的方式通过具有公网`IP`节点的中转暴露到公网。
 # 三、为什么使用frp？
@@ -25,7 +25,7 @@ excerpt: FRP内网穿透指南
 # 四、下载
 [Releases · fatedier/frp](https://github.com/fatedier/frp/releases)
 # 五、工作原理
-frp主要由**客户端(**`**frpc**`**)**和**服务端(**`**frps**`**)**组成，服务端通常部署在具有公网IP的机器上，客户端通常部署在需要穿透的内网服务所在的机器上。<br />内网服务由于没有公网IP，不能被非局域网内的其他用户访问。<br />用户通过访问服务端的`frps`，由`frp`负责根据请求的端口或其他信息将请求路由到对应的内网机器，从而实现通信。<br />在`frp`中一个代理对应一个需要暴露的内网服务。一个客户端支持同时配置多个代理。<br />`frp`支持多种代理类型来适配不同的使用场景。
+frp主要由客户端(`frpc`)和服务端(`frps`)组成，服务端通常部署在具有公网IP的机器上，客户端通常部署在需要穿透的内网服务所在的机器上。内网服务由于没有公网IP，不能被非局域网内的其他用户访问。用户通过访问服务端的`frps`，由`frp`负责根据请求的端口或其他信息将请求路由到对应的内网机器，从而实现通信。在`frp`中一个代理对应一个需要暴露的内网服务。一个客户端支持同时配置多个代理。`frp`支持多种代理类型来适配不同的使用场景。
 
 | 类型 | 描述 |
 | --- | --- |
@@ -40,7 +40,7 @@ frp主要由**客户端(**`**frpc**`**)**和**服务端(**`**frps**`**)**组成�
 
 # 六、配置文件
 ## 1.基本配置解析
-配置文件是`frp`的核心组件，决定了`frp`的运行方式和运行参数。<br />`frp`目前仅支持ini格式的配置文件，`frps`和`frpc`各自支持不同的参数。<br />`frpc`：指客户端(Clinet)配置文件，`frps`：指服务端(Server)配置文件。<br />`frps`主要配置服务端的一些通用参数，`frpc`则需要额外配置每一个代理的详细配置。
+配置文件是`frp`的核心组件，决定了`frp`的运行方式和运行参数。`frp`目前仅支持ini格式的配置文件，`frps`和`frpc`各自支持不同的参数。`frpc`：指客户端(Clinet)配置文件，`frps`：指服务端(Server)配置文件。`frps`主要配置服务端的一些通用参数，`frpc`则需要额外配置每一个代理的详细配置。
 ```
 #[common]是固定名称的段落，用于配置通用参数。
 [common]
@@ -60,7 +60,7 @@ remote_port = 6000
 [common]
 server_addr = x.x.x.x
 server_port = 7000
-includes = ./confd/*.ini
+includes = ./confd/.ini
 ```
 ```
 [ssh]
@@ -70,7 +70,7 @@ local_port = 22
 remote_port = 6000
 ```
 ## 3.负载均衡
-可以将多个相同类型的代理加入到同一个group中，从而实现负载均衡的能力。<br />目前支持的代理类型：`tcp`,`http`,`tcpmux`
+可以将多个相同类型的代理加入到同一个group中，从而实现负载均衡的能力。目前支持的代理类型：`tcp`,`http`,`tcpmux`
 ```
 [test1]
 type = tcp
@@ -86,7 +86,7 @@ remote_port = 80
 group = web
 group_key = 123
 ```
-用户连接`frps`服务器的80端口，`frps`会将接收到的用户连接随机分发给其中一个存活的`proxy`。这样可以在一台`frpc`机器挂掉后仍然有其他节点能够提供服务。<br />tcp类型代理要求`group_key`相同，做权限验证，且`remote_port`相同。<br />http类型代理要求`group_key`,`custom_domains`或`subdomain`和`locations`相同。
+用户连接`frps`服务器的80端口，`frps`会将接收到的用户连接随机分发给其中一个存活的`proxy`。这样可以在一台`frpc`机器挂掉后仍然有其他节点能够提供服务。tcp类型代理要求`group_key`相同，做权限验证，且`remote_port`相同。http类型代理要求`group_key`,`custom_domains`或`subdomain`和`locations`相同。
 ## 4.通信加密与压缩
 ```
 [ssh]
@@ -96,7 +96,7 @@ remote_port = 6000
 use_encryption = true
 use_compression = true
 ```
-通过设置`use_encryption`=`true`，将`frpc`与`frps`之间的通信内容加密传输，将会有效防止传输内容被截取。<br />如果传输的报文长度较长，通过设置`use_compression`=`true`对传输内容进行压缩，可以有效减小`frpc`与`frps`之间的网络流量，加快流量转发速度，但是会额外消耗一些CPU资源。
+通过设置`use_encryption`=`true`，将`frpc`与`frps`之间的通信内容加密传输，将会有效防止传输内容被截取。如果传输的报文长度较长，通过设置`use_compression`=`true`对传输内容进行压缩，可以有效减小`frpc`与`frps`之间的网络流量，加快流量转发速度，但是会额外消耗一些CPU资源。
 ## 5.服务端完整配置
 ### (1)基础配置
 | 参数 | 类型 | 说明 | 默认值 | 可选值 | 备注 |
