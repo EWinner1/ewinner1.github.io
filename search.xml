@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Augular</title>
+    <url>/2023/03/24/Augular/</url>
+    <content><![CDATA[<h1 id="Angular"><a href="#Angular" class="headerlink" title="Angular"></a>Angular</h1><h2 id="较好的项目结构"><a href="#较好的项目结构" class="headerlink" title="较好的项目结构"></a>较好的项目结构</h2><div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">.</span><br><span class="line">├── PageA</span><br><span class="line">│   ├── Components</span><br><span class="line">│   └── shared</span><br><span class="line">│       ├── resolves</span><br><span class="line">│       │   └── resolveA</span><br><span class="line">│       └── services</span><br><span class="line">│           └── service</span><br><span class="line">└── PageB</span><br><span class="line">    └── ···</span><br></pre></td></tr></table></figure></div>
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>Angular</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Config a new theme in github page</title>
     <url>/2023/03/19/Config-a-new-theme-in-github-page/</url>
     <content><![CDATA[<h1 id="选择一个你喜欢的主题"><a href="#选择一个你喜欢的主题" class="headerlink" title="选择一个你喜欢的主题"></a>选择一个你喜欢的主题</h1><p>安装一个新的主题首先当然是选择一个你喜欢的样式, 对于 hexo, 你可以在<a class="link"   href="https://hexo.io/themes/" >这里</a>寻找到你喜欢的主题的样式, 这里选择的是<a class="link"   href="https://github.com/EvanNotFound/hexo-theme-redefine" >Redefine theme</a>, 其具有不错的样式和中文文档。</p>
@@ -53,27 +65,6 @@
       <categories>
         <category>Github pages</category>
       </categories>
-  </entry>
-  <entry>
-    <title>Network Tools</title>
-    <url>/2023/03/24/Network-Tools/</url>
-    <content><![CDATA[<h1 id="MyTools"><a href="#MyTools" class="headerlink" title="MyTools"></a>MyTools</h1><p>挺好用的代码<a class="link"   href="https://tree.nathanfriend.io/" >树形图生成器</a></p>
-]]></content>
-      <categories>
-        <category>Tools</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Augular</title>
-    <url>/2023/03/24/Augular/</url>
-    <content><![CDATA[<h1 id="Angular"><a href="#Angular" class="headerlink" title="Angular"></a>Angular</h1><h2 id="较好的项目结构"><a href="#较好的项目结构" class="headerlink" title="较好的项目结构"></a>较好的项目结构</h2><div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">.</span><br><span class="line">├── PageA</span><br><span class="line">│   ├── Components</span><br><span class="line">│   └── shared</span><br><span class="line">│       ├── resolves</span><br><span class="line">│       │   └── resolveA</span><br><span class="line">│       └── services</span><br><span class="line">│           └── service</span><br><span class="line">└── PageB</span><br><span class="line">    └── ···</span><br></pre></td></tr></table></figure></div>
-]]></content>
-      <categories>
-        <category>Tech</category>
-      </categories>
-      <tags>
-        <tag>Angular</tag>
-      </tags>
   </entry>
   <entry>
     <title>常用写作模块</title>
@@ -212,9 +203,18 @@
       </categories>
   </entry>
   <entry>
+    <title>Network Tools</title>
+    <url>/2023/03/24/Network-Tools/</url>
+    <content><![CDATA[<h1 id="MyTools"><a href="#MyTools" class="headerlink" title="MyTools"></a>MyTools</h1><p>挺好用的代码<a class="link"   href="https://tree.nathanfriend.io/" >树形图生成器</a></p>
+]]></content>
+      <categories>
+        <category>Tools</category>
+      </categories>
+  </entry>
+  <entry>
     <title>frp Guidelines</title>
     <url>/2024/08/30/frp-Guidelines/</url>
-    <content><![CDATA[<h1 id="一、官方文档"><a href="#一、官方文档" class="headerlink" title="一、官方文档"></a>一、官方文档</h1><p><a class="link"   href="https://gofrp.org/docs/overview/" >概览</a></p>
+    <content><![CDATA[<h1 id="一、官方文档"><a href="#一、官方文档" class="headerlink" title="一、官方文档"></a>一、官方文档</h1><p><a class="link"   href="https://gofrp.org/zh-cn/docs/" >frp中文概览</a></p>
 <h1 id="二、frp是什么？"><a href="#二、frp是什么？" class="headerlink" title="二、frp是什么？"></a>二、frp是什么？</h1><p><code>frp</code>是一个专注于内网穿透的高性能的反向代理应用，支持<code>TCP</code>、<code>UDP</code>、<code>HTTP</code>、<code>HTTPS</code>等多种协议。可以将内网服务以安全、便捷的方式通过具有公网<code>IP</code>节点的中转暴露到公网。</p>
 <h1 id="三、为什么使用frp？"><a href="#三、为什么使用frp？" class="headerlink" title="三、为什么使用frp？"></a>三、为什么使用frp？</h1><p>通过在具有公网IP的节点上部署<code>frp</code>服务端，可以轻松地将内网服务穿透到公网，同时提供诸多专业的功能特性，这包括：</p>
 <ul>
@@ -227,7 +227,7 @@
 <li>服务端和客户端UI页面。</li>
 </ul>
 <h1 id="四、下载"><a href="#四、下载" class="headerlink" title="四、下载"></a>四、下载</h1><p><a class="link"   href="https://github.com/fatedier/frp/releases" >Releases · fatedier&#x2F;frp</a></p>
-<h1 id="五、工作原理"><a href="#五、工作原理" class="headerlink" title="五、工作原理"></a>五、工作原理</h1><p>frp主要由<strong>客户端(</strong><code>**frpc**</code><strong>)<strong>和</strong>服务端(</strong><code>**frps**</code>**)**组成，服务端通常部署在具有公网IP的机器上，客户端通常部署在需要穿透的内网服务所在的机器上。<br />内网服务由于没有公网IP，不能被非局域网内的其他用户访问。<br />用户通过访问服务端的<code>frps</code>，由<code>frp</code>负责根据请求的端口或其他信息将请求路由到对应的内网机器，从而实现通信。<br />在<code>frp</code>中一个代理对应一个需要暴露的内网服务。一个客户端支持同时配置多个代理。<br /><code>frp</code>支持多种代理类型来适配不同的使用场景。</p>
+<h1 id="五、工作原理"><a href="#五、工作原理" class="headerlink" title="五、工作原理"></a>五、工作原理</h1><p>frp主要由客户端(<code>frpc</code>)和服务端(<code>frps</code>)组成，服务端通常部署在具有公网IP的机器上，客户端通常部署在需要穿透的内网服务所在的机器上。内网服务由于没有公网IP，不能被非局域网内的其他用户访问。用户通过访问服务端的<code>frps</code>，由<code>frp</code>负责根据请求的端口或其他信息将请求路由到对应的内网机器，从而实现通信。在<code>frp</code>中一个代理对应一个需要暴露的内网服务。一个客户端支持同时配置多个代理。<code>frp</code>支持多种代理类型来适配不同的使用场景。</p>
 <table>
 <thead>
 <tr>
@@ -268,16 +268,16 @@
 <td>支持服务端<code>TCP</code>端口的多路复用，通过同一个端口访问不同的内网服务。</td>
 </tr>
 </tbody></table>
-<h1 id="六、配置文件"><a href="#六、配置文件" class="headerlink" title="六、配置文件"></a>六、配置文件</h1><h2 id="1-基本配置解析"><a href="#1-基本配置解析" class="headerlink" title="1.基本配置解析"></a>1.基本配置解析</h2><p>配置文件是<code>frp</code>的核心组件，决定了<code>frp</code>的运行方式和运行参数。<br /><code>frp</code>目前仅支持ini格式的配置文件，<code>frps</code>和<code>frpc</code>各自支持不同的参数。<br /><code>frpc</code>：指客户端(Clinet)配置文件，<code>frps</code>：指服务端(Server)配置文件。<br /><code>frps</code>主要配置服务端的一些通用参数，<code>frpc</code>则需要额外配置每一个代理的详细配置。</p>
+<h1 id="六、配置文件"><a href="#六、配置文件" class="headerlink" title="六、配置文件"></a>六、配置文件</h1><h2 id="1-基本配置解析"><a href="#1-基本配置解析" class="headerlink" title="1.基本配置解析"></a>1.基本配置解析</h2><p>配置文件是<code>frp</code>的核心组件，决定了<code>frp</code>的运行方式和运行参数。<code>frp</code>目前仅支持ini格式的配置文件，<code>frps</code>和<code>frpc</code>各自支持不同的参数。<code>frpc</code>：指客户端(Clinet)配置文件，<code>frps</code>：指服务端(Server)配置文件。<code>frps</code>主要配置服务端的一些通用参数，<code>frpc</code>则需要额外配置每一个代理的详细配置。</p>
 <div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">#[common]是固定名称的段落，用于配置通用参数。</span><br><span class="line">[common]</span><br><span class="line">server_addr = x.x.x.x</span><br><span class="line">server_port = 7000</span><br><span class="line"></span><br><span class="line">#[ssh]代表仅在代理ssh时使用的参数，在客户端使用，代理名称唯一且不可重复，但在同一个客户端中可以配置多个代理，比如[remoteDesktop]等</span><br><span class="line">[ssh]</span><br><span class="line">type = tcp</span><br><span class="line">local_ip = 127.0.0.1</span><br><span class="line">local_port = 22</span><br><span class="line">remote_port = 6000</span><br></pre></td></tr></table></figure></div>
 <h2 id="2-使用include参数"><a href="#2-使用include参数" class="headerlink" title="2.使用include参数"></a>2.使用include参数</h2><p>通过<code>includes</code>参数可以在主配置中包含其他配置文件，从而实现将代理配置拆分到多个文件中管理。</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">[common]</span><br><span class="line">server_addr = x.x.x.x</span><br><span class="line">server_port = 7000</span><br><span class="line">includes = ./confd/*.ini</span><br></pre></td></tr></table></figure></div>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">[common]</span><br><span class="line">server_addr = x.x.x.x</span><br><span class="line">server_port = 7000</span><br><span class="line">includes = ./confd/.ini</span><br></pre></td></tr></table></figure></div>
 <div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">[ssh]</span><br><span class="line">type = tcp</span><br><span class="line">local_ip = 127.0.0.1</span><br><span class="line">local_port = 22</span><br><span class="line">remote_port = 6000</span><br></pre></td></tr></table></figure></div>
-<h2 id="3-负载均衡"><a href="#3-负载均衡" class="headerlink" title="3.负载均衡"></a>3.负载均衡</h2><p>可以将多个相同类型的代理加入到同一个group中，从而实现负载均衡的能力。<br />目前支持的代理类型：<code>tcp</code>,<code>http</code>,<code>tcpmux</code></p>
+<h2 id="3-负载均衡"><a href="#3-负载均衡" class="headerlink" title="3.负载均衡"></a>3.负载均衡</h2><p>可以将多个相同类型的代理加入到同一个group中，从而实现负载均衡的能力。目前支持的代理类型：<code>tcp</code>,<code>http</code>,<code>tcpmux</code></p>
 <div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">[test1]</span><br><span class="line">type = tcp</span><br><span class="line">local_port = 8080</span><br><span class="line">remote_port = 80</span><br><span class="line">group = web</span><br><span class="line">group_key = 123</span><br><span class="line"></span><br><span class="line">[test2]</span><br><span class="line">type = tcp</span><br><span class="line">local_port = 8081</span><br><span class="line">remote_port = 80</span><br><span class="line">group = web</span><br><span class="line">group_key = 123</span><br></pre></td></tr></table></figure></div>
-<p>用户连接<code>frps</code>服务器的80端口，<code>frps</code>会将接收到的用户连接随机分发给其中一个存活的<code>proxy</code>。这样可以在一台<code>frpc</code>机器挂掉后仍然有其他节点能够提供服务。<br />tcp类型代理要求<code>group_key</code>相同，做权限验证，且<code>remote_port</code>相同。<br />http类型代理要求<code>group_key</code>,<code>custom_domains</code>或<code>subdomain</code>和<code>locations</code>相同。</p>
+<p>用户连接<code>frps</code>服务器的80端口，<code>frps</code>会将接收到的用户连接随机分发给其中一个存活的<code>proxy</code>。这样可以在一台<code>frpc</code>机器挂掉后仍然有其他节点能够提供服务。tcp类型代理要求<code>group_key</code>相同，做权限验证，且<code>remote_port</code>相同。http类型代理要求<code>group_key</code>,<code>custom_domains</code>或<code>subdomain</code>和<code>locations</code>相同。</p>
 <h2 id="4-通信加密与压缩"><a href="#4-通信加密与压缩" class="headerlink" title="4.通信加密与压缩"></a>4.通信加密与压缩</h2><div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">[ssh]</span><br><span class="line">type = tcp</span><br><span class="line">local_port = 22</span><br><span class="line">remote_port = 6000</span><br><span class="line">use_encryption = true</span><br><span class="line">use_compression = true</span><br></pre></td></tr></table></figure></div>
-<p>通过设置<code>use_encryption</code>&#x3D;<code>true</code>，将<code>frpc</code>与<code>frps</code>之间的通信内容加密传输，将会有效防止传输内容被截取。<br />如果传输的报文长度较长，通过设置<code>use_compression</code>&#x3D;<code>true</code>对传输内容进行压缩，可以有效减小<code>frpc</code>与<code>frps</code>之间的网络流量，加快流量转发速度，但是会额外消耗一些CPU资源。</p>
+<p>通过设置<code>use_encryption</code>&#x3D;<code>true</code>，将<code>frpc</code>与<code>frps</code>之间的通信内容加密传输，将会有效防止传输内容被截取。如果传输的报文长度较长，通过设置<code>use_compression</code>&#x3D;<code>true</code>对传输内容进行压缩，可以有效减小<code>frpc</code>与<code>frps</code>之间的网络流量，加快流量转发速度，但是会额外消耗一些CPU资源。</p>
 <h2 id="5-服务端完整配置"><a href="#5-服务端完整配置" class="headerlink" title="5.服务端完整配置"></a>5.服务端完整配置</h2><h3 id="1-基础配置"><a href="#1-基础配置" class="headerlink" title="(1)基础配置"></a>(1)基础配置</h3><table>
 <thead>
 <tr>
@@ -815,7 +815,7 @@
 <td>连接服务端使用的代理地址</td>
 <td></td>
 <td></td>
-<td>格式为 {protocol}:&#x2F;&#x2F;user:<a class="link"   href="mailto:&#x70;&#x61;&#x73;&#x73;&#x77;&#x64;&#64;&#x31;&#57;&#x32;&#x2e;&#49;&#54;&#x38;&#46;&#x31;&#46;&#49;&#50;&#56;" >&#x70;&#x61;&#x73;&#x73;&#x77;&#x64;&#64;&#x31;&#57;&#x32;&#x2e;&#49;&#54;&#x38;&#46;&#x31;&#46;&#49;&#50;&#56;</a>:8080 protocol 目前支持 http、socks5、ntlm</td>
+<td>格式为 {protocol}:&#x2F;&#x2F;user:<a class="link"   href="mailto:&#x70;&#97;&#115;&#115;&#119;&#100;&#64;&#49;&#x39;&#x32;&#46;&#49;&#x36;&#x38;&#46;&#x31;&#46;&#x31;&#x32;&#56;" >&#x70;&#97;&#115;&#115;&#119;&#100;&#64;&#49;&#x39;&#x32;&#46;&#49;&#x36;&#x38;&#46;&#x31;&#46;&#x31;&#x32;&#56;</a>:8080 protocol 目前支持 http、socks5、ntlm</td>
 </tr>
 <tr>
 <td>log_file</td>
