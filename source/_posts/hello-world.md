@@ -1,8 +1,8 @@
 ---
 title: Hello World
 date: 2023-03-01 12:46:11
-tags:
-categories: [Blog] #分类
+tags: [Blog]
+categories: [Github pages] #分类
 ---
 
 Welcome to [Hexo](https://hexo.io/)

@@ -185,9 +185,12 @@ navbar:
     Archives:
       path: /archives
       icon: fa-regular fa-archive # can be empty
-    Tags: 
-        icon: fa-solid fa-tags #图标
-        path: /tags/ #链接
+    Tags:
+      path: /tags/ #链接
+      icon: fa-solid fa-tags #图标
+    categories:
+      path: /categories/ #链接
+      icon: fa-solid fa-folder #图标
     # Status:
     #   path: https://status.evanluo.top/
     #   icon: fa-regular fa-chart-bar

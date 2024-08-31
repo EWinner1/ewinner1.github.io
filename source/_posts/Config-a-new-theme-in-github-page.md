@@ -1,7 +1,7 @@
 ---
 title: Config a new theme in github page
 date: 2023-03-19 12:46:11
-tags: 
+tags: [Blog]
 categories: [Github pages] #分类
 # sticky: #优先级
 thumbnail: "/images/How-to-config-a-theme.png"

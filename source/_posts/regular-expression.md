@@ -1,8 +1,8 @@
 ---
 title: 常用的正则表达式语法
-categories: []
+categories: [Tech]
 date: 2024-08-31 10:30:54
-tags:
+tags: [Regular expression]
 sticky:
 thumbnail:
 excerpt: 常用的正则表达式语法

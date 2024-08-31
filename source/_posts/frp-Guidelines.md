@@ -2,7 +2,7 @@
 title: frp Guidelines
 categories: [Tech]
 date: 2024-08-30 18:20:17
-tags: tools
+tags: [frp]
 sticky: 
 thumbnail: 
 excerpt: FRP内网穿透指南

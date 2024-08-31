@@ -1,8 +1,8 @@
 ---
 title: log4j
-categories: []
+categories: [Tech]
 date: 2024-08-30 18:45:17
-tags:
+tags: [log4j, Tech]
 sticky:
 thumbnail:
 excerpt: log4j

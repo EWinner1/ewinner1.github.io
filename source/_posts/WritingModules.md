@@ -1,8 +1,8 @@
 ---
 title: 常用写作模块
-categories: [Blog]
+categories: [Github pages]
 date: 2023-03-25 13:18:33
-tags:
+tags: [Blog]
 excerpt: 常用写作模块测试
 ---
 
