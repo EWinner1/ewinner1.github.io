@@ -65,6 +65,21 @@
       <categories>
         <category>Github pages</category>
       </categories>
+      <tags>
+        <tag>Blog</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Network Tools</title>
+    <url>/2023/03/24/Network-Tools/</url>
+    <content><![CDATA[<h1 id="MyTools"><a href="#MyTools" class="headerlink" title="MyTools"></a>MyTools</h1><p>挺好用的代码<a class="link"   href="https://tree.nathanfriend.io/" >树形图生成器</a></p>
+]]></content>
+      <categories>
+        <category>Tools</category>
+      </categories>
+      <tags>
+        <tag>Network</tag>
+      </tags>
   </entry>
   <entry>
     <title>常用写作模块</title>
@@ -199,17 +214,11 @@
 <p>This is Tab 3.</p></div></div></div>
 ]]></content>
       <categories>
-        <category>Blog</category>
+        <category>Github pages</category>
       </categories>
-  </entry>
-  <entry>
-    <title>Network Tools</title>
-    <url>/2023/03/24/Network-Tools/</url>
-    <content><![CDATA[<h1 id="MyTools"><a href="#MyTools" class="headerlink" title="MyTools"></a>MyTools</h1><p>挺好用的代码<a class="link"   href="https://tree.nathanfriend.io/" >树形图生成器</a></p>
-]]></content>
-      <categories>
-        <category>Tools</category>
-      </categories>
+      <tags>
+        <tag>Blog</tag>
+      </tags>
   </entry>
   <entry>
     <title>frp Guidelines</title>
@@ -815,7 +824,7 @@
 <td>连接服务端使用的代理地址</td>
 <td></td>
 <td></td>
-<td>格式为 {protocol}:&#x2F;&#x2F;user:<a class="link"   href="mailto:&#x70;&#97;&#115;&#115;&#119;&#100;&#64;&#49;&#x39;&#x32;&#46;&#49;&#x36;&#x38;&#46;&#x31;&#46;&#x31;&#x32;&#56;" >&#x70;&#97;&#115;&#115;&#119;&#100;&#64;&#49;&#x39;&#x32;&#46;&#49;&#x36;&#x38;&#46;&#x31;&#46;&#x31;&#x32;&#56;</a>:8080 protocol 目前支持 http、socks5、ntlm</td>
+<td>格式为 {protocol}:&#x2F;&#x2F;user:<a class="link"   href="mailto:&#x70;&#x61;&#115;&#x73;&#119;&#100;&#x40;&#x31;&#x39;&#50;&#46;&#49;&#x36;&#56;&#46;&#49;&#x2e;&#49;&#50;&#56;" >&#x70;&#x61;&#115;&#x73;&#119;&#100;&#x40;&#x31;&#x39;&#50;&#46;&#49;&#x36;&#56;&#46;&#49;&#x2e;&#49;&#50;&#56;</a>:8080 protocol 目前支持 http、socks5、ntlm</td>
 </tr>
 <tr>
 <td>log_file</td>
@@ -1191,7 +1200,7 @@
         <category>Tech</category>
       </categories>
       <tags>
-        <tag>tools</tag>
+        <tag>frp</tag>
       </tags>
   </entry>
   <entry>
@@ -1217,8 +1226,11 @@
 <p>More info: <a class="link"   href="https://hexo.io/docs/one-command-deployment.html" >Deployment</a></p>
 ]]></content>
       <categories>
-        <category>Blog</category>
+        <category>Github pages</category>
       </categories>
+      <tags>
+        <tag>Blog</tag>
+      </tags>
   </entry>
   <entry>
     <title>log4j</title>
@@ -1248,5 +1260,128 @@
 <p>要打印日志，只需要按 Commons Logging 的写法写，不需要改动任何代码，就可以得到 Log4j 的日志输出，类似：</p>
 <div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">03-03 12:09:45.880 [main] INFO  com.itranswarp.learnjava.Main</span><br><span class="line">Start process...</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
 ]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>log4j</tag>
+        <tag>Tech</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>常用的正则表达式语法</title>
+    <url>/2024/08/31/regular-expression/</url>
+    <content><![CDATA[<p><a class="link"   href="https://www.runoob.com/regexp/regexp-syntax.html" >正则表达式 – 语法 | 菜鸟教程</a></p>
+<table>
+<thead>
+<tr>
+<th>表达式</th>
+<th>匹配结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>+</td>
+<td>匹配前面的子表达式一次或多次。要匹配 + 字符，请使用 \+</td>
+</tr>
+<tr>
+<td></td>
+<td>匹配前面的子表达式零次或多次。要匹配  字符，请使用 \</td>
+</tr>
+<tr>
+<td>?</td>
+<td>匹配前面的子表达式零次或多次。要匹配  字符，请使用 \</td>
+</tr>
+<tr>
+<td>[abcde]</td>
+<td>匹配所有的”[]”里的字符</td>
+</tr>
+<tr>
+<td>[^abcde]</td>
+<td>匹配所有的非”[]”里的字符</td>
+</tr>
+<tr>
+<td>A-Z</td>
+<td>匹配所有的大写字母</td>
+</tr>
+<tr>
+<td>a-z</td>
+<td>匹配所有的小写字母</td>
+</tr>
+<tr>
+<td>.</td>
+<td>匹配除换行符 (\n、\r) 之外的任何单个字符，相当于 [^\n\r]</td>
+</tr>
+<tr>
+<td>\b</td>
+<td>匹配一个单词边界，即字与空格间的位置</td>
+</tr>
+<tr>
+<td>\B</td>
+<td>非单词边界匹配</td>
+</tr>
+<tr>
+<td>\s</td>
+<td>匹配所有的空白符，包括换行</td>
+</tr>
+<tr>
+<td>\S</td>
+<td>匹配所有的非空白符，不包括换行</td>
+</tr>
+<tr>
+<td>\w</td>
+<td>匹配字母数字下划线，等价于[A-Za-z0-9]</td>
+</tr>
+<tr>
+<td>^</td>
+<td>匹配字符串的开始</td>
+</tr>
+<tr>
+<td>$</td>
+<td>匹配字符串的结尾</td>
+</tr>
+<tr>
+<td>()</td>
+<td>匹配子表达式的开始和结束位置，被括号包裹的元素被视为一个单独的元素。</td>
+</tr>
+<tr>
+<td>\</td>
+<td>转义字符</td>
+</tr>
+<tr>
+<td>a{n}</td>
+<td>匹配括号前面的字符n次</td>
+</tr>
+<tr>
+<td>a{n,}</td>
+<td>匹配括号前面的字符<strong>至少</strong>n次</td>
+</tr>
+<tr>
+<td>a{n,m}</td>
+<td>匹配括号前面的字符<strong>至少</strong>n次，<strong>至多</strong>m次</td>
+</tr>
+<tr>
+<td>exp1(?&#x3D;exp2)</td>
+<td>查找<strong>满足</strong>表达式2且在表达式2<strong>前面</strong>的表达式1</td>
+</tr>
+<tr>
+<td>exp1(?!exp2)</td>
+<td>查找<strong>不满足</strong>表达式2且在表达式2<strong>前面</strong>的表达式1</td>
+</tr>
+<tr>
+<td>(?&lt;&#x3D;exp2)exp1</td>
+<td>查找<strong>满足</strong>表达式2且在表达式2<strong>后面</strong>的表达式1</td>
+</tr>
+<tr>
+<td>(?&lt;!exp2)exp1</td>
+<td>查找<strong>不满足</strong>表达式2且在表达式2<strong>后面</strong>的表达式1</td>
+</tr>
+</tbody></table>
+]]></content>
+      <categories>
+        <category>Tech</category>
+      </categories>
+      <tags>
+        <tag>Regular expression</tag>
+      </tags>
   </entry>
 </search>
