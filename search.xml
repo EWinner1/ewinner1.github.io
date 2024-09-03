@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Network Tools</title>
+    <url>/2023/03/24/Network-Tools/</url>
+    <content><![CDATA[<h1 id="MyTools"><a href="#MyTools" class="headerlink" title="MyTools"></a>MyTools</h1><p>挺好用的代码<a class="link"   href="https://tree.nathanfriend.io/" >树形图生成器</a></p>
+]]></content>
+      <categories>
+        <category>Tools</category>
+      </categories>
+      <tags>
+        <tag>Network</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Augular</title>
     <url>/2023/03/24/Augular/</url>
     <content><![CDATA[<h1 id="Angular"><a href="#Angular" class="headerlink" title="Angular"></a>Angular</h1><h2 id="较好的项目结构"><a href="#较好的项目结构" class="headerlink" title="较好的项目结构"></a>较好的项目结构</h2><div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">.</span><br><span class="line">├── PageA</span><br><span class="line">│   ├── Components</span><br><span class="line">│   └── shared</span><br><span class="line">│       ├── resolves</span><br><span class="line">│       │   └── resolveA</span><br><span class="line">│       └── services</span><br><span class="line">│           └── service</span><br><span class="line">└── PageB</span><br><span class="line">    └── ···</span><br></pre></td></tr></table></figure></div>
@@ -206,18 +218,6 @@
       </categories>
       <tags>
         <tag>Blog</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Network Tools</title>
-    <url>/2023/03/24/Network-Tools/</url>
-    <content><![CDATA[<h1 id="MyTools"><a href="#MyTools" class="headerlink" title="MyTools"></a>MyTools</h1><p>挺好用的代码<a class="link"   href="https://tree.nathanfriend.io/" >树形图生成器</a></p>
-]]></content>
-      <categories>
-        <category>Tools</category>
-      </categories>
-      <tags>
-        <tag>Network</tag>
       </tags>
   </entry>
   <entry>
@@ -824,7 +824,7 @@
 <td>连接服务端使用的代理地址</td>
 <td></td>
 <td></td>
-<td>格式为 {protocol}:&#x2F;&#x2F;user:<a class="link"   href="mailto:&#x70;&#x61;&#115;&#x73;&#119;&#x64;&#64;&#x31;&#57;&#x32;&#46;&#x31;&#54;&#56;&#46;&#x31;&#46;&#49;&#x32;&#56;" >&#x70;&#x61;&#115;&#x73;&#119;&#x64;&#64;&#x31;&#57;&#x32;&#46;&#x31;&#54;&#56;&#46;&#x31;&#46;&#49;&#x32;&#56;</a>:8080 protocol 目前支持 http、socks5、ntlm</td>
+<td>格式为 {protocol}:&#x2F;&#x2F;user:<a class="link"   href="mailto:&#112;&#x61;&#x73;&#x73;&#x77;&#100;&#64;&#49;&#x39;&#x32;&#46;&#x31;&#54;&#56;&#46;&#x31;&#46;&#49;&#x32;&#56;" >&#112;&#x61;&#x73;&#x73;&#x77;&#100;&#64;&#49;&#x39;&#x32;&#46;&#x31;&#54;&#56;&#46;&#x31;&#46;&#49;&#x32;&#56;</a>:8080 protocol 目前支持 http、socks5、ntlm</td>
 </tr>
 <tr>
 <td>log_file</td>
@@ -1204,39 +1204,32 @@
       </tags>
   </entry>
   <entry>
-    <title>log4j</title>
-    <url>/2024/08/30/log4j/</url>
-    <content><![CDATA[<p>Log4j 是一种非常流行的日志框架，最新版本是 2.x。</p>
-<p>Log4j 是一个组件化设计的日志系统，它的架构大致如下：</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="/images/log4j.png"
-                      alt="log4j"
-                ></p>
-<p>当我们使用 Log4j 输出一条日志时，Log4j 自动通过不同的 Appender 把同一条日志输出到不同的目的地。例如：</p>
-<ul>
-<li><code>console</code>：输出到屏幕；</li>
-<li><code>file</code>：输出到文件；</li>
-<li><code>socket</code>：通过网络输出到远程计算机；</li>
-<li><code>jdbc</code>：输出到数据库</li>
-</ul>
-<p>在输出日志的过程中，通过 Filter 来过滤哪些 log 需要被输出，哪些 log 不需要被输出。例如，仅输出 ERROR 级别的日志。<br>最后，通过 Layout 来格式化日志信息，例如，自动添加日期、时间、方法名称等信息。<br>上述结构虽然复杂，但我们在实际使用的时候，并不需要关心 Log4j 的 API，而是通过配置文件来配置它。<br>以 XML 配置为例，使用 Log4j 的时候，我们把一个 log4j2.xml 的文件放到 classpath 下就可以让 Log4j 读取配置文件并按照我们的配置来输出日志。下面是一个配置文件的例子：</p>
-<div class="highlight-container" data-rel="Xml"><figure class="iseeu highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Configuration</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">Properties</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 定义日志格式 --&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">Property</span> <span class="attr">name</span>=<span class="string">&quot;log.pattern&quot;</span>&gt;</span>%d&#123;MM-dd HH:mm:ss.SSS&#125; [%t] %-5level %logger&#123;36&#125;%n%msg%n%n<span class="tag">&lt;/<span class="name">Property</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 定义文件名变量 --&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">Property</span> <span class="attr">name</span>=<span class="string">&quot;file.err.filename&quot;</span>&gt;</span>log/err.log<span class="tag">&lt;/<span class="name">Property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">Property</span> <span class="attr">name</span>=<span class="string">&quot;file.err.pattern&quot;</span>&gt;</span>log/err.%i.log.gz<span class="tag">&lt;/<span class="name">Property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">Properties</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 定义Appender，即目的地 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">Appenders</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 定义输出到屏幕 --&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">Console</span> <span class="attr">name</span>=<span class="string">&quot;console&quot;</span> <span class="attr">target</span>=<span class="string">&quot;SYSTEM_OUT&quot;</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 日志格式引用上面定义的log.pattern --&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">PatternLayout</span> <span class="attr">pattern</span>=<span class="string">&quot;$&#123;log.pattern&#125;&quot;</span> /&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">Console</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 定义输出到文件,文件名引用上面定义的file.err.filename --&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">RollingFile</span> <span class="attr">name</span>=<span class="string">&quot;err&quot;</span> <span class="attr">bufferedIO</span>=<span class="string">&quot;true&quot;</span> <span class="attr">fileName</span>=<span class="string">&quot;$&#123;file.err.filename&#125;&quot;</span> <span class="attr">filePattern</span>=<span class="string">&quot;$&#123;file.err.pattern&#125;&quot;</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">PatternLayout</span> <span class="attr">pattern</span>=<span class="string">&quot;$&#123;log.pattern&#125;&quot;</span> /&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">Policies</span>&gt;</span></span><br><span class="line">                <span class="comment">&lt;!-- 根据文件大小自动切割日志 --&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">SizeBasedTriggeringPolicy</span> <span class="attr">size</span>=<span class="string">&quot;1 MB&quot;</span> /&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">Policies</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 保留最近10份 --&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">DefaultRolloverStrategy</span> <span class="attr">max</span>=<span class="string">&quot;10&quot;</span> /&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">RollingFile</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">Appenders</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">Loggers</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">Root</span> <span class="attr">level</span>=<span class="string">&quot;info&quot;</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 对info级别的日志，输出到console --&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">AppenderRef</span> <span class="attr">ref</span>=<span class="string">&quot;console&quot;</span> <span class="attr">level</span>=<span class="string">&quot;info&quot;</span> /&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 对error级别的日志，输出到err，即上面定义的RollingFile --&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">AppenderRef</span> <span class="attr">ref</span>=<span class="string">&quot;err&quot;</span> <span class="attr">level</span>=<span class="string">&quot;error&quot;</span> /&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">Root</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">Loggers</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Configuration</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+    <title>Hello World</title>
+    <url>/2023/03/01/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a class="link"   href="https://hexo.io/" >Hexo</a><br>This is your very first post. Check <a class="link"   href="https://hexo.io/docs/" >documentation</a> for more info.<br>If you get any problems when using Hexo, you can find the answer in <a class="link"   href="https://hexo.io/docs/troubleshooting.html" >troubleshooting</a> or you can ask me on <a class="link"   href="https://github.com/hexojs/hexo/issues" >GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="初始化网站"><a href="#初始化网站" class="headerlink" title="初始化网站"></a>初始化网站</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo init [folder]</span><br></pre></td></tr></table></figure></div>
 
-<p>虽然配置 Log4j 比较繁琐，但一旦配置完成，使用起来就非常方便。对上面的配置文件，凡是 INFO 级别的日志，会自动输出到屏幕，而 ERROR 级别的日志，不但会输出到屏幕，还会同时输出到文件。并且，一旦日志文件达到指定大小（1MB），Log4j 就会自动切割新的日志文件，并最多保留 10 份。</p>
-<p>有了配置文件还不够，因为 Log4j 也是一个第三方库，我们需要从这里下载 Log4j，解压后，把以下 3 个 jar 包放到 classpath 中：</p>
-<p>log4j-api-2.x.jar<br>log4j-core-2.x.jar<br>log4j-jcl-2.x.jar</p>
-<p>因为 Commons Logging 会自动发现并使用 Log4j，所以，把上一节下载的 commons-logging-1.2.jar 也放到 classpath 中。</p>
-<p>要打印日志，只需要按 Commons Logging 的写法写，不需要改动任何代码，就可以得到 Log4j 的日志输出，类似：</p>
-<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">03-03 12:09:45.880 [main] INFO  com.itranswarp.learnjava.Main</span><br><span class="line">Start process...</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<h3 id="创建一个新的-Blog"><a href="#创建一个新的-Blog" class="headerlink" title="创建一个新的 Blog"></a>创建一个新的 Blog</h3><p>如果标题包含空格，使用引号将其包裹起来。</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure></div>
+
+<p>More info: <a class="link"   href="https://hexo.io/docs/writing.html" >Writing</a></p>
+<h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure></div>
+
+<p>More info: <a class="link"   href="https://hexo.io/docs/server.html" >Server</a></p>
+<h3 id="清理可能存在的编译缓存问题"><a href="#清理可能存在的编译缓存问题" class="headerlink" title="清理可能存在的编译缓存问题"></a>清理可能存在的编译缓存问题</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo clean</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="编译生成静态文件"><a href="#编译生成静态文件" class="headerlink" title="编译生成静态文件"></a>编译生成静态文件</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure></div>
+
+<p>More info: <a class="link"   href="https://hexo.io/docs/generating.html" >Generating</a></p>
+<h3 id="部署到-github"><a href="#部署到-github" class="headerlink" title="部署到 github"></a>部署到 github</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure></div>
+
+<p>More info: <a class="link"   href="https://hexo.io/docs/one-command-deployment.html" >Deployment</a></p>
 ]]></content>
       <categories>
-        <category>Tech</category>
+        <category>Github pages</category>
       </categories>
       <tags>
-        <tag>log4j</tag>
-        <tag>Tech</tag>
+        <tag>Blog</tag>
       </tags>
   </entry>
   <entry>
@@ -1356,32 +1349,39 @@
       </tags>
   </entry>
   <entry>
-    <title>Hello World</title>
-    <url>/2023/03/01/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a class="link"   href="https://hexo.io/" >Hexo</a><br>This is your very first post. Check <a class="link"   href="https://hexo.io/docs/" >documentation</a> for more info.<br>If you get any problems when using Hexo, you can find the answer in <a class="link"   href="https://hexo.io/docs/troubleshooting.html" >troubleshooting</a> or you can ask me on <a class="link"   href="https://github.com/hexojs/hexo/issues" >GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="初始化网站"><a href="#初始化网站" class="headerlink" title="初始化网站"></a>初始化网站</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo init [folder]</span><br></pre></td></tr></table></figure></div>
+    <title>log4j</title>
+    <url>/2024/08/30/log4j/</url>
+    <content><![CDATA[<p>Log4j 是一种非常流行的日志框架，最新版本是 2.x。</p>
+<p>Log4j 是一个组件化设计的日志系统，它的架构大致如下：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/log4j.png"
+                      alt="log4j"
+                ></p>
+<p>当我们使用 Log4j 输出一条日志时，Log4j 自动通过不同的 Appender 把同一条日志输出到不同的目的地。例如：</p>
+<ul>
+<li><code>console</code>：输出到屏幕；</li>
+<li><code>file</code>：输出到文件；</li>
+<li><code>socket</code>：通过网络输出到远程计算机；</li>
+<li><code>jdbc</code>：输出到数据库</li>
+</ul>
+<p>在输出日志的过程中，通过 Filter 来过滤哪些 log 需要被输出，哪些 log 不需要被输出。例如，仅输出 ERROR 级别的日志。<br>最后，通过 Layout 来格式化日志信息，例如，自动添加日期、时间、方法名称等信息。<br>上述结构虽然复杂，但我们在实际使用的时候，并不需要关心 Log4j 的 API，而是通过配置文件来配置它。<br>以 XML 配置为例，使用 Log4j 的时候，我们把一个 log4j2.xml 的文件放到 classpath 下就可以让 Log4j 读取配置文件并按照我们的配置来输出日志。下面是一个配置文件的例子：</p>
+<div class="highlight-container" data-rel="Xml"><figure class="iseeu highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Configuration</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">Properties</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 定义日志格式 --&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">Property</span> <span class="attr">name</span>=<span class="string">&quot;log.pattern&quot;</span>&gt;</span>%d&#123;MM-dd HH:mm:ss.SSS&#125; [%t] %-5level %logger&#123;36&#125;%n%msg%n%n<span class="tag">&lt;/<span class="name">Property</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 定义文件名变量 --&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">Property</span> <span class="attr">name</span>=<span class="string">&quot;file.err.filename&quot;</span>&gt;</span>log/err.log<span class="tag">&lt;/<span class="name">Property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">Property</span> <span class="attr">name</span>=<span class="string">&quot;file.err.pattern&quot;</span>&gt;</span>log/err.%i.log.gz<span class="tag">&lt;/<span class="name">Property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">Properties</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 定义Appender，即目的地 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">Appenders</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 定义输出到屏幕 --&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">Console</span> <span class="attr">name</span>=<span class="string">&quot;console&quot;</span> <span class="attr">target</span>=<span class="string">&quot;SYSTEM_OUT&quot;</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 日志格式引用上面定义的log.pattern --&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">PatternLayout</span> <span class="attr">pattern</span>=<span class="string">&quot;$&#123;log.pattern&#125;&quot;</span> /&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">Console</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 定义输出到文件,文件名引用上面定义的file.err.filename --&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">RollingFile</span> <span class="attr">name</span>=<span class="string">&quot;err&quot;</span> <span class="attr">bufferedIO</span>=<span class="string">&quot;true&quot;</span> <span class="attr">fileName</span>=<span class="string">&quot;$&#123;file.err.filename&#125;&quot;</span> <span class="attr">filePattern</span>=<span class="string">&quot;$&#123;file.err.pattern&#125;&quot;</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">PatternLayout</span> <span class="attr">pattern</span>=<span class="string">&quot;$&#123;log.pattern&#125;&quot;</span> /&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">Policies</span>&gt;</span></span><br><span class="line">                <span class="comment">&lt;!-- 根据文件大小自动切割日志 --&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">SizeBasedTriggeringPolicy</span> <span class="attr">size</span>=<span class="string">&quot;1 MB&quot;</span> /&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">Policies</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 保留最近10份 --&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">DefaultRolloverStrategy</span> <span class="attr">max</span>=<span class="string">&quot;10&quot;</span> /&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">RollingFile</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">Appenders</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">Loggers</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">Root</span> <span class="attr">level</span>=<span class="string">&quot;info&quot;</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 对info级别的日志，输出到console --&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">AppenderRef</span> <span class="attr">ref</span>=<span class="string">&quot;console&quot;</span> <span class="attr">level</span>=<span class="string">&quot;info&quot;</span> /&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 对error级别的日志，输出到err，即上面定义的RollingFile --&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">AppenderRef</span> <span class="attr">ref</span>=<span class="string">&quot;err&quot;</span> <span class="attr">level</span>=<span class="string">&quot;error&quot;</span> /&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">Root</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">Loggers</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Configuration</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
 
-<h3 id="创建一个新的-Blog"><a href="#创建一个新的-Blog" class="headerlink" title="创建一个新的 Blog"></a>创建一个新的 Blog</h3><p>如果标题包含空格，使用引号将其包裹起来。</p>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure></div>
-
-<p>More info: <a class="link"   href="https://hexo.io/docs/writing.html" >Writing</a></p>
-<h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure></div>
-
-<p>More info: <a class="link"   href="https://hexo.io/docs/server.html" >Server</a></p>
-<h3 id="清理可能存在的编译缓存问题"><a href="#清理可能存在的编译缓存问题" class="headerlink" title="清理可能存在的编译缓存问题"></a>清理可能存在的编译缓存问题</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo clean</span><br></pre></td></tr></table></figure></div>
-
-<h3 id="编译生成静态文件"><a href="#编译生成静态文件" class="headerlink" title="编译生成静态文件"></a>编译生成静态文件</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure></div>
-
-<p>More info: <a class="link"   href="https://hexo.io/docs/generating.html" >Generating</a></p>
-<h3 id="部署到-github"><a href="#部署到-github" class="headerlink" title="部署到 github"></a>部署到 github</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure></div>
-
-<p>More info: <a class="link"   href="https://hexo.io/docs/one-command-deployment.html" >Deployment</a></p>
+<p>虽然配置 Log4j 比较繁琐，但一旦配置完成，使用起来就非常方便。对上面的配置文件，凡是 INFO 级别的日志，会自动输出到屏幕，而 ERROR 级别的日志，不但会输出到屏幕，还会同时输出到文件。并且，一旦日志文件达到指定大小（1MB），Log4j 就会自动切割新的日志文件，并最多保留 10 份。</p>
+<p>有了配置文件还不够，因为 Log4j 也是一个第三方库，我们需要从这里下载 Log4j，解压后，把以下 3 个 jar 包放到 classpath 中：</p>
+<p>log4j-api-2.x.jar<br>log4j-core-2.x.jar<br>log4j-jcl-2.x.jar</p>
+<p>因为 Commons Logging 会自动发现并使用 Log4j，所以，把上一节下载的 commons-logging-1.2.jar 也放到 classpath 中。</p>
+<p>要打印日志，只需要按 Commons Logging 的写法写，不需要改动任何代码，就可以得到 Log4j 的日志输出，类似：</p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">03-03 12:09:45.880 [main] INFO  com.itranswarp.learnjava.Main</span><br><span class="line">Start process...</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
 ]]></content>
       <categories>
-        <category>Github pages</category>
+        <category>Tech</category>
       </categories>
       <tags>
-        <tag>Blog</tag>
+        <tag>log4j</tag>
+        <tag>Tech</tag>
       </tags>
   </entry>
 </search>
