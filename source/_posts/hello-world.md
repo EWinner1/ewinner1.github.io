@@ -1,12 +1,12 @@
 ---
-title: Hello World
+title: Hello, let's go quick start!
 date: 2023-03-01 12:46:11
 tags: [Blog]
 categories: [Github pages] #分类
 ---
 
 Welcome to [Hexo](https://hexo.io/)
-This is your very first post. Check [documentation](https://hexo.io/docs/) for more info.
+This is your very first post. Check [English documentation](https://hexo.io/docs/) or [中文文档](https://hexo.io/zh-cn/docs/index.html) for more info.
 If you get any problems when using Hexo, you can find the answer in [troubleshooting](https://hexo.io/docs/troubleshooting.html) or you can ask me on [GitHub](https://github.com/hexojs/hexo/issues).
 
 ## Quick Start

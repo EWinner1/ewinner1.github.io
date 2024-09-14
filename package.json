@@ -6,7 +6,8 @@
     "clean": "hexo clean",
     "build": "hexo generate",
     "deploy": "hexo deploy",
-    "server": "hexo server --port 52520 -o",
+    "start": "hexo server --port 52520 -o",
+    "cleanStart": "hexo clean && hexo generate && hexo server --port 52520 -o",
     "rebuild": "hexo clean && hexo generate",
     "onetap": "hexo clean && hexo generate && hexo deploy"
   },
@@ -26,7 +27,7 @@
     "hexo-renderer-marked": "^6.3.0",
     "hexo-renderer-stylus": "^3.0.1",
     "hexo-server": "^3.0.0",
-    "hexo-theme-redefine": "^2.7.0"
+    "hexo-theme-redefine": "^2.7.1"
   },
   "devDependencies": {
     "hexo": "^7.3.0"
