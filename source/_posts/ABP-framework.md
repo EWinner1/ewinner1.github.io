@@ -18,6 +18,8 @@ ABP framework，全名 ASP.NET Boierplate Project，是基于 ASP.Net Core，通
 PS> dotnet tool install -g Volo.Abp.Studio.Cli
 ```
 
+在实际的开发过程中，会将一切的**层**都抽象为**模块**，也就是说不存在**Service层**等，只存在**Services模块**整体作为模块存在，表现为极高的高内聚，低耦合，层与层的关系变更为模块和模块之间的依赖关系，学习 ABP 就是学习对于模块的使用。
+
 ## 控制台程序开发
 
 对于普通的控制台应用程序，我们只需要创建一个根模块，然后使其继承`AbpModule`即可完成根模块的创建。
@@ -136,4 +138,23 @@ public class HelloABPWebModule : AbpModule
 	}
 }
 ```
+
+详细的方法如下图
+![ABP](/images/ABP-module-load.png)
 通常情况下，我们可以在`ConfigureServices`和`OnApplicationInitialization`两个方法中进行对应用的一些常见配置。
+
+## 依赖注入
+
+在 ABP 框架中，依赖加载的顺序是按照模块的依赖顺序的反向进行加载，即执行的是先进后出的栈的加载顺序。
+
+## 启动流程
+
+通过`builder.Services.AddApplication<ModuleName>()`指定启动对象，并将与 ABP 相关的框架模块等自动注入到主程序中。
+
+- 注册 ASP.Net Core 的基础服务，ABP 的核心服务
+- 对所有的 ABP 模块进行依赖排序后加载
+- 遍历所有模块，执行每一个模块的**配置服务**和**初始化**方法
+
+## ABP和DDD领域驱动设计
+
+领域驱动设计（Domain-Driven Design，简称DDD），是一种面向对象设计思想，它将软件系统分解为多个领域，每个领域都对应一个实体，实体之间通过行为进行交互，行为是领域内的规则，这些规则是领域内的核心，是领域驱动设计的核心。ABP框架是DDD的最佳实践之一。
