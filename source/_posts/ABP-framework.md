@@ -18,7 +18,7 @@ ABP framework，全名 ASP.NET Boierplate Project，是基于 ASP.Net Core，通
 PS> dotnet tool install -g Volo.Abp.Studio.Cli
 ```
 
-在实际的开发过程中，会将一切的**层**都抽象为**模块**，也就是说不存在**Service层**等，只存在**Services模块**整体作为模块存在，表现为极高的高内聚，低耦合，层与层的关系变更为模块和模块之间的依赖关系，学习 ABP 就是学习对于模块的使用。
+在实际的开发过程中，会将一切的**层**都抽象为**模块**，也就是说不存在 Service **层**等，只存在 Services **模块**整体作为模块存在，表现为极高的高内聚，低耦合，层与层的关系变更为模块和模块之间的依赖关系，学习 ABP 就是学习对于模块的使用。
 
 ## 控制台程序开发
 
@@ -155,6 +155,100 @@ public class HelloABPWebModule : AbpModule
 - 对所有的 ABP 模块进行依赖排序后加载
 - 遍历所有模块，执行每一个模块的**配置服务**和**初始化**方法
 
-## ABP和DDD领域驱动设计
+## ABP 和 DDD 领域驱动设计
 
-领域驱动设计（Domain-Driven Design，简称DDD），是一种面向对象设计思想，它将软件系统分解为多个领域，每个领域都对应一个实体，实体之间通过行为进行交互，行为是领域内的规则，这些规则是领域内的核心，是领域驱动设计的核心。ABP框架是DDD的最佳实践之一。
+领域驱动设计（Domain-Driven Design，简称 DDD），是一种面向对象设计思想，它将软件系统分解为多个领域，每个领域都对应一个实体，实体之间通过行为进行交互，行为是领域内的规则，这些规则是领域内的核心，是领域驱动设计的核心。ABP 框架是 DDD 的最佳实践之一。ABP 框架的领域驱动设计，将领域模型抽象为模块，每个模块都对应一个实体，实体之间通过行为进行交互，行为是领域内的规则，这些规则是领域内的核心，是领域驱动设计的核心。
+DDD 的四层架构表现为
+├── 表示层
+│ ├── .Web
+│ ├── .HttpApi
+│ └── .HttpApiClient
+├── 应用层
+│ ├── .Application.Contracts
+│ └── .Application
+├── 领域层
+│ ├── .Domain.Shared
+│ └── .Domain
+└── 基础层
+└── .EntityFrameworkCore
+Domain.Shared 通常用于定义存放公共的常量，枚举等领域辅助对象。不依赖于其他任何项目。Domain 是解决方案中的核心项目，其中主要包括实体，聚合根，领域服务，仓储接口等。
+应用层中 Application.Contracts 主要包含应用服务接口和数据传输对象，为了分离业务层的接口和实现。Application 包括应用服务，实现应用服务接口。
+表示层中主要包括控制器，大部分情况下不需要手动创建控制器，通过自动生成器生成即可。客户端代理也不需要手动创建，通过自动生成器生成即可。
+![ABP依赖关系图](/images/ABP-Dependencies.png)
+
+# 实战
+
+## EF Core 配置
+
+1. 配置数据库连接字符串，在 DBContext 中定义实体和数据库表的映射关系
+2. 使用 EF Core 构建迁移代码。
+3. 使用迁移代码生成数据库，准备初始数据。
+4. 应用迁移和初始数据。
+
+在构建映射关系时，我们有两种方案，一种是使用注解方式，一种是使用 FluentAPI 方式。关于注解方式，可以参考这个例子
+
+```C#
+public class Category : AuditedAggregateRoot<Guid>
+{
+	[Required]
+	[StringLength(128)]
+	public string Name { get; set; }
+}
+```
+
+使用注解方式时有个局限性，当使用 EF Core 特有的注解时会强制要求引用 EF Core 的相关 nuget 包。所以我们采用 FluentAPI 的方式对实体进行配置。
+
+```C# FluentAPI
+protected override void OnModelCreating(ModelBuilder builder)
+{
+	......
+	builder.Entity<Category>(p =>
+	{
+		p.ToTable("Categories");
+		p.Property(x => x.Name)
+			.HasMaxLength(CategoryConsts.MaxNameLength)
+			.IsRequired();
+		p.HasIndex(x => x.Name);
+	});
+	builder.ApplyConfiguration(new ProductConfiguration());
+	......
+}
+```
+
+{% notel blue 附：ProductConfiguration配置 %}
+
+```C#
+internal class ProductConfiguration : IEntityTypeConfiguration<Product>
+{
+	public void Configure(EntityTypeBuilder<Product> builder)
+	{
+		builder.ToTable("Products");
+		builder.Property(x => x.Name).HasMaxLength(ProductConsts.MaxNameLength).IsRequired();
+		builder.HasOne(x => x.Category).WithMany().HasForeignKey(x => x.CategoryId).OnDelete(DeleteBehavior.Restrict).IsRequired();
+		builder.HasIndex(x => x.Name).IsUnique();
+	}
+}
+```
+
+{% endnotel %}
+因为在创建项目时会自动生成一个数据库迁移文件，而我们添加了新的实体，所以需要重新生成一个迁移文件。在终端中 cd 到 EF core 目录下，执行命令`dotnet ef migrations add xxxxxxxx`。通常，我们只需要再执行一次`dotnet ef database update`命令，即可完成数据库的更新。但是这种方式只能迁移实体结构，不能进行数据的初始化。所以我们使用 ABP 的数据播种功能。
+
+## 数据播种
+
+在 EF Core 中我们可以创建一个数据种子类，在迁移的时候，ABP 会找到所有的数据种子类，完成数据的播种。ABP 在继承了以上功能的同时也做了其他的更高级的功能，允许我们使用更加复杂的逻辑。数据种子类一般位于 Domain 文件夹中的 Data 文件夹下。
+
+```C#
+class ProductManagementDataSeedContributor(
+	IRepository<Category, Guid> categoryRepository,
+	IRepository<Product, Guid> productRepository) : IDataSeedContributor, ITransientDependency
+{
+	private readonly IRepository<Category, Guid> categoryRepository = categoryRepository;
+	private readonly IRepository<Product, Guid> productRepository = productRepository;
+
+	public Task SeedAsync(DataSeedContext context)
+	{
+		.......
+	}
+}
+```
+ABP会自动发现实现了`IDataSeedContributor`接口的类，并调用`SeedAsync`方法。每当我们执行迁移操作时都会执行数据播种。
