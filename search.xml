@@ -6,6 +6,7 @@
     <content><![CDATA[<h1 id="简要"><a href="#简要" class="headerlink" title="简要"></a>简要</h1><p>ABP framework，全名 ASP.NET Boierplate Project，是基于 ASP.Net Core，通过遵循软件开发最佳实践和最新技术创建现代 web 应用程序和 API。在后续发展过程中逐渐迭代并更名为 ABP framework。为了将企业级的开发技术与最先进的架构组合起来而诞生的快速开发套件。具有完善的基础设施，基于 DDD 领域驱动设计的分层架构，模块化开发。<br>相关链接：<a class="link"   href="https://github.com/abpframework/abp" >Abp framework - Github</a> 和 <a class="link"   href="https://abp.io/" >abp.io 官网</a>。<br>在开发过程中，对于熟悉 ABP 框架的人来说可以使用 ABP cli 进行快速创建，通过运行指令快速安装。</p>
 <div class="highlight-container" data-rel="Powershell"><figure class="iseeu highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="built_in">PS</span>&gt; dotnet tool install <span class="literal">-g</span> Volo.Abp.Studio.Cli</span><br></pre></td></tr></table></figure></div>
 
+<p>在实际的开发过程中，会将一切的<strong>层</strong>都抽象为<strong>模块</strong>，也就是说不存在 Service <strong>层</strong>等，只存在 Services <strong>模块</strong>整体作为模块存在，表现为极高的高内聚，低耦合，层与层的关系变更为模块和模块之间的依赖关系，学习 ABP 就是学习对于模块的使用。</p>
 <h2 id="控制台程序开发"><a href="#控制台程序开发" class="headerlink" title="控制台程序开发"></a>控制台程序开发</h2><p>对于普通的控制台应用程序，我们只需要创建一个根模块，然后使其继承<code>AbpModule</code>即可完成根模块的创建。</p>
 <div class="highlight-container" data-rel="C#"><figure class="iseeu highlight c#"><figcaption><span>根模块</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="keyword">internal</span> <span class="keyword">class</span> <span class="title">HelloABPModule</span> : <span class="title">AbpModule</span></span><br><span class="line">&#123;</span><br><span class="line">	......</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
 
@@ -26,7 +27,53 @@
 
 <h2 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h2><p>在模块中的几个重要的生命周期</p>
 <div class="highlight-container" data-rel="C#"><figure class="iseeu highlight c#"><table><tr><td class="code"><pre><span class="line">[<span class="meta">DependsOn(typeof(AbpAspNetCoreMvcModule))</span>]</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">HelloABPWebModule</span> : <span class="title">AbpModule</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">//按顺序加载，配置</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">PreConfigureServices</span>(<span class="params">ServiceConfigurationContext context</span>)</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">base</span>.PreConfigureServices(context);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">ConfigureServices</span>(<span class="params">ServiceConfigurationContext context</span>)</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">base</span>.ConfigureServices(context);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">PostConfigureServices</span>(<span class="params">ServiceConfigurationContext context</span>)</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">base</span>.PostConfigureServices(context);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">OnPreApplicationInitialization</span>(<span class="params">ApplicationInitializationContext context</span>)</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">base</span>.OnPreApplicationInitialization(context);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">OnApplicationInitialization</span>(<span class="params">ApplicationInitializationContext context</span>)</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">base</span>.OnApplicationInitialization(context);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">OnPostApplicationInitialization</span>(<span class="params">ApplicationInitializationContext context</span>)</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">base</span>.OnPostApplicationInitialization(context);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">OnApplicationShutdown</span>(<span class="params">ApplicationShutdownContext context</span>)</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">base</span>.OnApplicationShutdown(context);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-<p>通常情况下，我们可以在<code>ConfigureServices</code>和<code>OnApplicationInitialization</code>两个方法中进行对应用的一些常见配置。</p>
+
+<p>详细的方法如下图<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/ABP-module-load.png"
+                      alt="ABP"
+                ><br>通常情况下，我们可以在<code>ConfigureServices</code>和<code>OnApplicationInitialization</code>两个方法中进行对应用的一些常见配置。</p>
+<h2 id="依赖注入"><a href="#依赖注入" class="headerlink" title="依赖注入"></a>依赖注入</h2><p>在 ABP 框架中，依赖加载的顺序是按照模块的依赖顺序的反向进行加载，即执行的是先进后出的栈的加载顺序。</p>
+<h2 id="启动流程"><a href="#启动流程" class="headerlink" title="启动流程"></a>启动流程</h2><p>通过<code>builder.Services.AddApplication&lt;ModuleName&gt;()</code>指定启动对象，并将与 ABP 相关的框架模块等自动注入到主程序中。</p>
+<ul>
+<li>注册 ASP.Net Core 的基础服务，ABP 的核心服务</li>
+<li>对所有的 ABP 模块进行依赖排序后加载</li>
+<li>遍历所有模块，执行每一个模块的<strong>配置服务</strong>和<strong>初始化</strong>方法</li>
+</ul>
+<h2 id="ABP-和-DDD-领域驱动设计"><a href="#ABP-和-DDD-领域驱动设计" class="headerlink" title="ABP 和 DDD 领域驱动设计"></a>ABP 和 DDD 领域驱动设计</h2><p>领域驱动设计（Domain-Driven Design，简称 DDD），是一种面向对象设计思想，它将软件系统分解为多个领域，每个领域都对应一个实体，实体之间通过行为进行交互，行为是领域内的规则，这些规则是领域内的核心，是领域驱动设计的核心。ABP 框架是 DDD 的最佳实践之一。ABP 框架的领域驱动设计，将领域模型抽象为模块，每个模块都对应一个实体，实体之间通过行为进行交互，行为是领域内的规则，这些规则是领域内的核心，是领域驱动设计的核心。<br>DDD 的四层架构表现为<br>├── 表示层<br>│ ├── .Web<br>│ ├── .HttpApi<br>│ └── .HttpApiClient<br>├── 应用层<br>│ ├── .Application.Contracts<br>│ └── .Application<br>├── 领域层<br>│ ├── .Domain.Shared<br>│ └── .Domain<br>└── 基础层<br>└── .EntityFrameworkCore<br>Domain.Shared 通常用于定义存放公共的常量，枚举等领域辅助对象。不依赖于其他任何项目。Domain 是解决方案中的核心项目，其中主要包括实体，聚合根，领域服务，仓储接口等。<br>应用层中 Application.Contracts 主要包含应用服务接口和数据传输对象，为了分离业务层的接口和实现。Application 包括应用服务，实现应用服务接口。<br>表示层中主要包括控制器，大部分情况下不需要手动创建控制器，通过自动生成器生成即可。客户端代理也不需要手动创建，通过自动生成器生成即可。<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="/images/ABP-Dependencies.png"
+                      alt="ABP依赖关系图"
+                ></p>
+<h1 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h1><h2 id="EF-Core-配置"><a href="#EF-Core-配置" class="headerlink" title="EF Core 配置"></a>EF Core 配置</h2><ol>
+<li>配置数据库连接字符串，在 DBContext 中定义实体和数据库表的映射关系</li>
+<li>使用 EF Core 构建迁移代码。</li>
+<li>使用迁移代码生成数据库，准备初始数据。</li>
+<li>应用迁移和初始数据。</li>
+</ol>
+<p>在构建映射关系时，我们有两种方案，一种是使用注解方式，一种是使用 FluentAPI 方式。关于注解方式，可以参考这个例子</p>
+<div class="highlight-container" data-rel="C#"><figure class="iseeu highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Category</span> : <span class="title">AuditedAggregateRoot</span>&lt;<span class="title">Guid</span>&gt;</span><br><span class="line">&#123;</span><br><span class="line">	[<span class="meta">Required</span>]</span><br><span class="line">	[<span class="meta">StringLength(128)</span>]</span><br><span class="line">	<span class="keyword">public</span> <span class="built_in">string</span> Name &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>使用注解方式时有个局限性，当使用 EF Core 特有的注解时会强制要求引用 EF Core 的相关 nuget 包。所以我们采用 FluentAPI 的方式对实体进行配置。</p>
+<div class="highlight-container" data-rel="C#"><figure class="iseeu highlight c#"><figcaption><span>FluentAPI</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">OnModelCreating</span>(<span class="params">ModelBuilder builder</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	......</span><br><span class="line">	builder.Entity&lt;Category&gt;(p =&gt;</span><br><span class="line">	&#123;</span><br><span class="line">		p.ToTable(<span class="string">&quot;Categories&quot;</span>);</span><br><span class="line">		p.Property(x =&gt; x.Name)</span><br><span class="line">			.HasMaxLength(CategoryConsts.MaxNameLength)</span><br><span class="line">			.IsRequired();</span><br><span class="line">		p.HasIndex(x =&gt; x.Name);</span><br><span class="line">	&#125;);</span><br><span class="line">	builder.ApplyConfiguration(<span class="keyword">new</span> ProductConfiguration());</span><br><span class="line">	......</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+
+  <div class="note-large blue">
+    <div class="notel-title rounded-t-lg p-3 font-bold text-lg flex flex-row gap-2 items-center">
+      <p>附：ProductConfiguration配置</p>
+
+    </div>
+    <div class="notel-content">
+      <div class="highlight-container" data-rel="C#"><figure class="iseeu highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">internal</span> <span class="keyword">class</span> <span class="title">ProductConfiguration</span> : <span class="title">IEntityTypeConfiguration</span>&lt;<span class="title">Product</span>&gt;</span><br><span class="line">&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Configure</span>(<span class="params">EntityTypeBuilder&lt;Product&gt; builder</span>)</span></span><br><span class="line">	&#123;</span><br><span class="line">		builder.ToTable(<span class="string">&quot;Products&quot;</span>);</span><br><span class="line">		builder.Property(x =&gt; x.Name).HasMaxLength(ProductConsts.MaxNameLength).IsRequired();</span><br><span class="line">		builder.HasOne(x =&gt; x.Category).WithMany().HasForeignKey(x =&gt; x.CategoryId).OnDelete(DeleteBehavior.Restrict).IsRequired();</span><br><span class="line">		builder.HasIndex(x =&gt; x.Name).IsUnique();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+    </div>
+  </div>
+<p>因为在创建项目时会自动生成一个数据库迁移文件，而我们添加了新的实体，所以需要重新生成一个迁移文件。在终端中 cd 到 EF core 目录下，执行命令<code>dotnet ef migrations add xxxxxxxx</code>。通常，我们只需要再执行一次<code>dotnet ef database update</code>命令，即可完成数据库的更新。但是这种方式只能迁移实体结构，不能进行数据的初始化。所以我们使用 ABP 的数据播种功能。</p>
+<h2 id="数据播种"><a href="#数据播种" class="headerlink" title="数据播种"></a>数据播种</h2><p>在 EF Core 中我们可以创建一个数据种子类，在迁移的时候，ABP 会找到所有的数据种子类，完成数据的播种。ABP 在继承了以上功能的同时也做了其他的更高级的功能，允许我们使用更加复杂的逻辑。数据种子类一般位于 Domain 文件夹中的 Data 文件夹下。</p>
+<div class="highlight-container" data-rel="C#"><figure class="iseeu highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title">ProductManagementDataSeedContributor</span>(</span><br><span class="line">	<span class="title">IRepository</span>&lt;<span class="title">Category</span>, <span class="title">Guid</span>&gt; <span class="title">categoryRepository</span>,</span><br><span class="line">	<span class="title">IRepository</span>&lt;<span class="title">Product</span>, <span class="title">Guid</span>&gt; <span class="title">productRepository</span>) : <span class="title">IDataSeedContributor</span>, <span class="title">ITransientDependency</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">readonly</span> IRepository&lt;Category, Guid&gt; categoryRepository = categoryRepository;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">readonly</span> IRepository&lt;Product, Guid&gt; productRepository = productRepository;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Task <span class="title">SeedAsync</span>(<span class="params">DataSeedContext context</span>)</span></span><br><span class="line">	&#123;</span><br><span class="line">		.......</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<p>ABP会自动发现实现了<code>IDataSeedContributor</code>接口的类，并调用<code>SeedAsync</code>方法。每当我们执行迁移操作时都会执行数据播种。</p>
 ]]></content>
       <categories>
         <category>Tech</category>
@@ -45,18 +92,6 @@
       </categories>
       <tags>
         <tag>Angular</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Network Tools</title>
-    <url>/2023/03/24/Network-Tools/</url>
-    <content><![CDATA[<h1 id="MyTools"><a href="#MyTools" class="headerlink" title="MyTools"></a>MyTools</h1><p>挺好用的代码<a class="link"   href="https://tree.nathanfriend.io/" >树形图生成器</a></p>
-]]></content>
-      <categories>
-        <category>Tools</category>
-      </categories>
-      <tags>
-        <tag>Network</tag>
       </tags>
   </entry>
   <entry>
@@ -114,6 +149,18 @@
       </categories>
       <tags>
         <tag>Blog</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Network Tools</title>
+    <url>/2023/03/24/Network-Tools/</url>
+    <content><![CDATA[<h1 id="MyTools"><a href="#MyTools" class="headerlink" title="MyTools"></a>MyTools</h1><p>挺好用的代码<a class="link"   href="https://tree.nathanfriend.io/" >树形图生成器</a></p>
+]]></content>
+      <categories>
+        <category>Tools</category>
+      </categories>
+      <tags>
+        <tag>Network</tag>
       </tags>
   </entry>
   <entry>
@@ -859,7 +906,7 @@
 <td>连接服务端使用的代理地址</td>
 <td></td>
 <td></td>
-<td>格式为 {protocol}:&#x2F;&#x2F;user:<a class="link"   href="mailto:&#112;&#97;&#x73;&#115;&#119;&#100;&#64;&#x31;&#x39;&#50;&#46;&#x31;&#x36;&#56;&#46;&#49;&#46;&#49;&#x32;&#x38;" >&#112;&#97;&#x73;&#115;&#119;&#100;&#64;&#x31;&#x39;&#50;&#46;&#x31;&#x36;&#56;&#46;&#49;&#46;&#49;&#x32;&#x38;</a>:8080 protocol 目前支持 http、socks5、ntlm</td>
+<td>格式为 {protocol}:&#x2F;&#x2F;user:<a class="link"   href="mailto:&#112;&#97;&#115;&#x73;&#x77;&#x64;&#64;&#x31;&#57;&#x32;&#x2e;&#49;&#54;&#56;&#46;&#49;&#46;&#49;&#50;&#x38;" >&#112;&#97;&#115;&#x73;&#x77;&#x64;&#64;&#x31;&#57;&#x32;&#x2e;&#49;&#54;&#56;&#46;&#49;&#46;&#49;&#50;&#x38;</a>:8080 protocol 目前支持 http、socks5、ntlm</td>
 </tr>
 <tr>
 <td>log_file</td>
