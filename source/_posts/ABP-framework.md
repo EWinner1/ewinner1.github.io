@@ -251,4 +251,131 @@ class ProductManagementDataSeedContributor(
 	}
 }
 ```
-ABP会自动发现实现了`IDataSeedContributor`接口的类，并调用`SeedAsync`方法。每当我们执行迁移操作时都会执行数据播种。
+
+ABP 会自动发现实现了`IDataSeedContributor`接口的类，并调用`SeedAsync`方法。每当我们执行迁移操作时都会执行数据播种。此时运行 DbMigrator 程序即可完成数据的播种。同时，继承了具有审计功能的实体，在播种时会自动填充审计信息。
+
+## CRUD
+
+首先，我们需要 DTO(Data Transfer Object)。DTO 我们一般定义在 Application.Contracts 下，继承`AuditedEntityDto`类。创建 IProductAppService 接口，继承`IApplicationService`接口。
+
+```C#
+pubilc interface IProductAppService : IApplicationService
+{
+	Task<PagedResultDto<ProductDto>> GetListAsync(PagedAndSortedResultRequestDto input);
+}
+```
+
+创建 ProductAppService 实现类，继承项目创建时生成的基类和 IProductAppService 接口。然后逐一实现CRUD的具体方法。
+```C#
+public class ProductAppService(
+	IRepository<Product, Guid> productRepository,
+	IRepository<Category, Guid> categoryRepository,
+	IUnitOfWorkManager unitOfWorkManager) : ManageSystemAppService, IProductAppService
+{
+	private readonly IRepository<Product, Guid> productRepository = productRepository;
+	private readonly IRepository<Category, Guid> categoryRepository = categoryRepository;
+	private readonly IUnitOfWorkManager unitOfWorkManager = unitOfWorkManager;
+
+	async Task<PagedResultDto<ProductDto>> IProductAppService.GetListAsync(PagedAndSortedResultRequestDto input)
+	{
+		var queryable = await productRepository.WithDetailsAsync(x => x.Category);
+		queryable = queryable.Skip(input.SkipCount).Take(input.MaxResultCount).OrderBy(input.Sorting ?? nameof(Product.Name));
+
+		var products = await AsyncExecuter.ToListAsync(queryable);
+		var count = await productRepository.GetCountAsync();
+
+		return new PagedResultDto<ProductDto>(
+			count,
+			ObjectMapper.Map<List<Product>, List<ProductDto>>(products));
+	}
+
+	public async Task CreateAsync()
+	{
+		var product = ObjectMapper.Map<>();
+		await productRepository.InsertAsync(product);
+	}
+
+	public async Task<ListResultDto<>> GetCategoriesAsync()
+	{
+		var categories = await categoryRepository.GetListAsync();
+		var categoryLookupDtos = ObjectMapper.Map<List<Category>, List<CategoryLookupDto>>(categories);
+
+		return new ListResultDto<CategoryLookupDto>(categoryLookupDtos);
+	}
+
+	public async Task<ProductDto> GetAsync(Guid id)
+	{
+		var product = await productRepository.GetAsync(id);
+		return ObjectMapper.Map<Product, ProductDto>(product);
+	}
+
+	public async Task UpdateAsync(Guid id, CreateUpdateProductDto input)
+	{
+		var product = await productRepository.GetAsync(id);
+		ObjectMapper.Map(input, product);
+	}
+
+	public async Task DeleteAsync(Guid id)
+	{
+		await productRepository.DeleteAsync(id);
+	}
+
+	[UnitOfWork(isTransactional: true)]
+	public async Task TodoSomethingAsync()
+	{
+		using (var uow = unitOfWorkManager.Begin(
+			requiresNew: true,
+			isTransactional: true,
+			timeout: 2000))
+		{
+			await productRepository.InsertAsync(new Product() { });
+			await productRepository.InsertAsync(new Product() { });
+			await uow.CompleteAsync();
+		}
+	}
+}
+```
+
+{% note info %}
+Notice: 在撰写的过程中，我们还注意到了提示`CrudAppService`，作为一个ABP的基类，它已经帮我们实现了CRUD的功能，我们只需要继承它，并实现我们自己的业务逻辑即可。具体内容有待探究。
+{% endnote %}
+`ObjectMapper.Map<>`方法在调用的时候会默认使用AutoMapper，所以我们需要去自己去定义一个AutoMapper的配置文件。AutoMapper可以自动将DTO和实体进行转换。在这个例子中，AutoMapper会将 Product 的 Category.Name 自动映射到 ProductDto 的 string 类型的CategoryName上。
+```C#
+public ManageSystemApplicationAutoMapperProfile()
+{
+	/* You can configure your AutoMapper mapping configuration here.
+     * Alternatively, you can split your mapping configurations
+     * into multiple profile classes for a better organization. */
+
+	CreateMap<Product, ProductDto>();
+}
+```
+完成后编写测试类，对对应功能进行测试。
+```C#
+public abstract class ProductAppServiceTests<TStartupModule> : ManageSystemApplicationTestBase<TStartupModule>
+	where TStartupModule : IAbpModule
+{
+	private readonly IProductAppService productAppService;
+	private readonly PagedAndSortedResultRequestDto dto;
+
+	public ProductAppServiceTests()
+	{
+		productAppService = GetRequiredService<IProductAppService>();
+		dto = new PagedAndSortedResultRequestDto();
+	}
+
+	[Fact]
+	public async Task Should_Get_Products_List()
+	{
+		var result = await productAppService.GetListAsync(dto);
+
+		result.TotalCount.ShouldBe(4);
+		result.Items.ShouldContain(x => x.Name.Contains("Xiaomi 13 Ultra black"));
+	}
+}
+```
+因为测试类中不能使用依赖注入的方法，所以我们使用GetRequiredService解决所需要的依赖关系，获取我们所需要的服务。
+
+{% note warning %}
+Notice: 在实际测试过程中发现，无法在新建的`ProductAppServiceTests`中完成测试。经调查发现，ABP自带的`SampleAppServiceTests`示例在继承了`ManageSystemApplicationTestBase<TStartupModule>`之后，还在`EfCoreSampleAppServiceTests`中再次继承了`SampleAppServiceTests`，最后实现了对内部的测试方法的直接测试调用。因此我们也单独实现了对应的测试方法。在官方的测试示例中，采用了`Substitute.For<>()`方法获取服务，但是会导致空引用错误。[Implementing unit tests in EF Core and MongoDB](https://abp.io/docs/8.0/Testing#implementing-unit-tests-in-ef-core-and-mongodb)
+{% endnote %}
