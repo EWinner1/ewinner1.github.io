@@ -73,8 +73,29 @@
 <p>因为在创建项目时会自动生成一个数据库迁移文件，而我们添加了新的实体，所以需要重新生成一个迁移文件。在终端中 cd 到 EF core 目录下，执行命令<code>dotnet ef migrations add xxxxxxxx</code>。通常，我们只需要再执行一次<code>dotnet ef database update</code>命令，即可完成数据库的更新。但是这种方式只能迁移实体结构，不能进行数据的初始化。所以我们使用 ABP 的数据播种功能。</p>
 <h2 id="数据播种"><a href="#数据播种" class="headerlink" title="数据播种"></a>数据播种</h2><p>在 EF Core 中我们可以创建一个数据种子类，在迁移的时候，ABP 会找到所有的数据种子类，完成数据的播种。ABP 在继承了以上功能的同时也做了其他的更高级的功能，允许我们使用更加复杂的逻辑。数据种子类一般位于 Domain 文件夹中的 Data 文件夹下。</p>
 <div class="highlight-container" data-rel="C#"><figure class="iseeu highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title">ProductManagementDataSeedContributor</span>(</span><br><span class="line">	<span class="title">IRepository</span>&lt;<span class="title">Category</span>, <span class="title">Guid</span>&gt; <span class="title">categoryRepository</span>,</span><br><span class="line">	<span class="title">IRepository</span>&lt;<span class="title">Product</span>, <span class="title">Guid</span>&gt; <span class="title">productRepository</span>) : <span class="title">IDataSeedContributor</span>, <span class="title">ITransientDependency</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">readonly</span> IRepository&lt;Category, Guid&gt; categoryRepository = categoryRepository;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">readonly</span> IRepository&lt;Product, Guid&gt; productRepository = productRepository;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Task <span class="title">SeedAsync</span>(<span class="params">DataSeedContext context</span>)</span></span><br><span class="line">	&#123;</span><br><span class="line">		.......</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-<p>ABP会自动发现实现了<code>IDataSeedContributor</code>接口的类，并调用<code>SeedAsync</code>方法。每当我们执行迁移操作时都会执行数据播种。</p>
-]]></content>
+
+<p>ABP 会自动发现实现了<code>IDataSeedContributor</code>接口的类，并调用<code>SeedAsync</code>方法。每当我们执行迁移操作时都会执行数据播种。此时运行 DbMigrator 程序即可完成数据的播种。同时，继承了具有审计功能的实体，在播种时会自动填充审计信息。</p>
+<h2 id="CRUD"><a href="#CRUD" class="headerlink" title="CRUD"></a>CRUD</h2><p>首先，我们需要 DTO(Data Transfer Object)。DTO 我们一般定义在 Application.Contracts 下，继承<code>AuditedEntityDto</code>类。创建 IProductAppService 接口，继承<code>IApplicationService</code>接口。</p>
+<div class="highlight-container" data-rel="C#"><figure class="iseeu highlight c#"><table><tr><td class="code"><pre><span class="line">pubilc <span class="keyword">interface</span> <span class="title">IProductAppService</span> : <span class="title">IApplicationService</span></span><br><span class="line">&#123;</span><br><span class="line">	Task&lt;PagedResultDto&lt;ProductDto&gt;&gt; GetListAsync(PagedAndSortedResultRequestDto input);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>创建 ProductAppService 实现类，继承项目创建时生成的基类和 IProductAppService 接口。然后逐一实现CRUD的具体方法。</p>
+<div class="highlight-container" data-rel="C#"><figure class="iseeu highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">ProductAppService</span>(<span class="params"></span></span></span><br><span class="line"><span class="params"><span class="function">	IRepository&lt;Product, Guid&gt; productRepository,</span></span></span><br><span class="line"><span class="params"><span class="function">	IRepository&lt;Category, Guid&gt; categoryRepository,</span></span></span><br><span class="line"><span class="params"><span class="function">	IUnitOfWorkManager unitOfWorkManager</span>) : ManageSystemAppService, IProductAppService</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">readonly</span> IRepository&lt;Product, Guid&gt; productRepository = productRepository;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">readonly</span> IRepository&lt;Category, Guid&gt; categoryRepository = categoryRepository;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">readonly</span> IUnitOfWorkManager unitOfWorkManager = unitOfWorkManager;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">async</span> Task&lt;PagedResultDto&lt;ProductDto&gt;&gt; IProductAppService.GetListAsync(PagedAndSortedResultRequestDto input)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">var</span> queryable = <span class="keyword">await</span> productRepository.WithDetailsAsync(x =&gt; x.Category);</span><br><span class="line">		queryable = queryable.Skip(input.SkipCount).Take(input.MaxResultCount).OrderBy(input.Sorting ?? <span class="keyword">nameof</span>(Product.Name));</span><br><span class="line"></span><br><span class="line">		<span class="keyword">var</span> products = <span class="keyword">await</span> AsyncExecuter.ToListAsync(queryable);</span><br><span class="line">		<span class="keyword">var</span> count = <span class="keyword">await</span> productRepository.GetCountAsync();</span><br><span class="line"></span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> PagedResultDto&lt;ProductDto&gt;(</span><br><span class="line">			count,</span><br><span class="line">			ObjectMapper.Map&lt;List&lt;Product&gt;, List&lt;ProductDto&gt;&gt;(products));</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">async</span> Task <span class="title">CreateAsync</span>()</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">var</span> product = ObjectMapper.Map&lt;&gt;();</span><br><span class="line">		<span class="keyword">await</span> productRepository.InsertAsync(product);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">async</span> Task&lt;ListResultDto&lt;&gt;&gt; GetCategoriesAsync()</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">var</span> categories = <span class="keyword">await</span> categoryRepository.GetListAsync();</span><br><span class="line">		<span class="keyword">var</span> categoryLookupDtos = ObjectMapper.Map&lt;List&lt;Category&gt;, List&lt;CategoryLookupDto&gt;&gt;(categories);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> ListResultDto&lt;CategoryLookupDto&gt;(categoryLookupDtos);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">async</span> Task&lt;ProductDto&gt; <span class="title">GetAsync</span>(<span class="params">Guid id</span>)</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">var</span> product = <span class="keyword">await</span> productRepository.GetAsync(id);</span><br><span class="line">		<span class="keyword">return</span> ObjectMapper.Map&lt;Product, ProductDto&gt;(product);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">async</span> Task <span class="title">UpdateAsync</span>(<span class="params">Guid id, CreateUpdateProductDto input</span>)</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">var</span> product = <span class="keyword">await</span> productRepository.GetAsync(id);</span><br><span class="line">		ObjectMapper.Map(input, product);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">async</span> Task <span class="title">DeleteAsync</span>(<span class="params">Guid id</span>)</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">await</span> productRepository.DeleteAsync(id);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	[<span class="meta">UnitOfWork(isTransactional: true)</span>]</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">async</span> Task <span class="title">TodoSomethingAsync</span>()</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">using</span> (<span class="keyword">var</span> uow = unitOfWorkManager.Begin(</span><br><span class="line">			requiresNew: <span class="literal">true</span>,</span><br><span class="line">			isTransactional: <span class="literal">true</span>,</span><br><span class="line">			timeout: <span class="number">2000</span>))</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">await</span> productRepository.InsertAsync(<span class="keyword">new</span> Product() &#123; &#125;);</span><br><span class="line">			<span class="keyword">await</span> productRepository.InsertAsync(<span class="keyword">new</span> Product() &#123; &#125;);</span><br><span class="line">			<span class="keyword">await</span> uow.CompleteAsync();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+
+  <div class="note p-4 mb-4 rounded-small info">
+    <p>Notice: 在撰写的过程中，我们还注意到了提示<code>CrudAppService</code>，作为一个ABP的基类，它已经帮我们实现了CRUD的功能，我们只需要继承它，并实现我们自己的业务逻辑即可。具体内容有待探究。</p>
+
+  </div>
+<p><code>ObjectMapper.Map&lt;&gt;</code>方法在调用的时候会默认使用AutoMapper，所以我们需要去自己去定义一个AutoMapper的配置文件。AutoMapper可以自动将DTO和实体进行转换。在这个例子中，AutoMapper会将 Product 的 Category.Name 自动映射到 ProductDto 的 string 类型的CategoryName上。</p>
+<div class="highlight-container" data-rel="C#"><figure class="iseeu highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ManageSystemApplicationAutoMapperProfile</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">/* You can configure your AutoMapper mapping configuration here.</span></span><br><span class="line"><span class="comment">     * Alternatively, you can split your mapping configurations</span></span><br><span class="line"><span class="comment">     * into multiple profile classes for a better organization. */</span></span><br><span class="line"></span><br><span class="line">	CreateMap&lt;Product, ProductDto&gt;();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<p>完成后编写测试类，对对应功能进行测试。</p>
+<div class="highlight-container" data-rel="C#"><figure class="iseeu highlight c#"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title">ProductAppServiceTests</span>&lt;<span class="title">TStartupModule</span>&gt; : <span class="title">ManageSystemApplicationTestBase</span>&lt;<span class="title">TStartupModule</span>&gt;</span><br><span class="line">	<span class="keyword">where</span> <span class="title">TStartupModule</span> : <span class="title">IAbpModule</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">readonly</span> IProductAppService productAppService;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">readonly</span> PagedAndSortedResultRequestDto dto;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">ProductAppServiceTests</span>()</span></span><br><span class="line">	&#123;</span><br><span class="line">		productAppService = GetRequiredService&lt;IProductAppService&gt;();</span><br><span class="line">		dto = <span class="keyword">new</span> PagedAndSortedResultRequestDto();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	[<span class="meta">Fact</span>]</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">async</span> Task <span class="title">Should_Get_Products_List</span>()</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">var</span> result = <span class="keyword">await</span> productAppService.GetListAsync(dto);</span><br><span class="line"></span><br><span class="line">		result.TotalCount.ShouldBe(<span class="number">4</span>);</span><br><span class="line">		result.Items.ShouldContain(x =&gt; x.Name.Contains(<span class="string">&quot;Xiaomi 13 Ultra black&quot;</span>));</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<p>因为测试类中不能使用依赖注入的方法，所以我们使用GetRequiredService解决所需要的依赖关系，获取我们所需要的服务。</p>
+
+  <div class="note p-4 mb-4 rounded-small warning">
+    <p>Notice: 在实际测试过程中发现，无法在新建的<code>ProductAppServiceTests</code>中完成测试。经调查发现，ABP自带的<code>SampleAppServiceTests</code>示例在继承了<code>ManageSystemApplicationTestBase&lt;TStartupModule&gt;</code>之后，还在<code>EfCoreSampleAppServiceTests</code>中再次继承了<code>SampleAppServiceTests</code>，最后实现了对内部的测试方法的直接测试调用。因此我们也单独实现了对应的测试方法。在官方的测试示例中，采用了<code>Substitute.For&lt;&gt;()</code>方法获取服务，但是会导致空引用错误。<a class="link"   href="https://abp.io/docs/8.0/Testing#implementing-unit-tests-in-ef-core-and-mongodb" >Implementing unit tests in EF Core and MongoDB</a></p>
+
+  </div>]]></content>
       <categories>
         <category>Tech</category>
       </categories>
@@ -294,6 +315,35 @@
 <p>This is Tab 2.</p></div><div class="tab-pane" id="first-unique-name-3"><p><strong>This is Tab 3.</strong></p>
 <p>This is Tab 3.</p>
 <p>This is Tab 3.</p></div></div></div>
+]]></content>
+      <categories>
+        <category>Github pages</category>
+      </categories>
+      <tags>
+        <tag>Blog</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello, let&#39;s go quick start!</title>
+    <url>/2023/03/01/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a class="link"   href="https://hexo.io/" >Hexo</a><br>This is your very first post. Check <a class="link"   href="https://hexo.io/docs/" >English documentation</a> or <a class="link"   href="https://hexo.io/zh-cn/docs/index.html" >中文文档</a> for more info.<br>If you get any problems when using Hexo, you can find the answer in <a class="link"   href="https://hexo.io/docs/troubleshooting.html" >troubleshooting</a> or you can ask me on <a class="link"   href="https://github.com/hexojs/hexo/issues" >GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="初始化网站"><a href="#初始化网站" class="headerlink" title="初始化网站"></a>初始化网站</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo init [folder]</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="创建一个新的-Blog"><a href="#创建一个新的-Blog" class="headerlink" title="创建一个新的 Blog"></a>创建一个新的 Blog</h3><p>如果标题包含空格，使用引号将其包裹起来。</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure></div>
+
+<p>More info: <a class="link"   href="https://hexo.io/docs/writing.html" >Writing</a></p>
+<h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure></div>
+
+<p>More info: <a class="link"   href="https://hexo.io/docs/server.html" >Server</a></p>
+<h3 id="清理可能存在的编译缓存问题"><a href="#清理可能存在的编译缓存问题" class="headerlink" title="清理可能存在的编译缓存问题"></a>清理可能存在的编译缓存问题</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo clean</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="编译生成静态文件"><a href="#编译生成静态文件" class="headerlink" title="编译生成静态文件"></a>编译生成静态文件</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure></div>
+
+<p>More info: <a class="link"   href="https://hexo.io/docs/generating.html" >Generating</a></p>
+<h3 id="部署到-github"><a href="#部署到-github" class="headerlink" title="部署到 github"></a>部署到 github</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure></div>
+
+<p>More info: <a class="link"   href="https://hexo.io/docs/one-command-deployment.html" >Deployment</a></p>
 ]]></content>
       <categories>
         <category>Github pages</category>
@@ -906,7 +956,7 @@
 <td>连接服务端使用的代理地址</td>
 <td></td>
 <td></td>
-<td>格式为 {protocol}:&#x2F;&#x2F;user:<a class="link"   href="mailto:&#112;&#97;&#115;&#x73;&#x77;&#x64;&#64;&#x31;&#57;&#x32;&#x2e;&#49;&#54;&#56;&#46;&#49;&#46;&#49;&#50;&#x38;" >&#112;&#97;&#115;&#x73;&#x77;&#x64;&#64;&#x31;&#57;&#x32;&#x2e;&#49;&#54;&#56;&#46;&#49;&#46;&#49;&#50;&#x38;</a>:8080 protocol 目前支持 http、socks5、ntlm</td>
+<td>格式为 {protocol}:&#x2F;&#x2F;user:<a class="link"   href="mailto:&#112;&#97;&#x73;&#115;&#119;&#x64;&#64;&#x31;&#57;&#50;&#46;&#x31;&#x36;&#56;&#46;&#49;&#46;&#49;&#x32;&#56;" >&#112;&#97;&#x73;&#115;&#119;&#x64;&#64;&#x31;&#57;&#50;&#46;&#x31;&#x36;&#56;&#46;&#49;&#46;&#49;&#x32;&#56;</a>:8080 protocol 目前支持 http、socks5、ntlm</td>
 </tr>
 <tr>
 <td>log_file</td>
@@ -1283,35 +1333,6 @@
       </categories>
       <tags>
         <tag>frp</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hello, let&#39;s go quick start!</title>
-    <url>/2023/03/01/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a class="link"   href="https://hexo.io/" >Hexo</a><br>This is your very first post. Check <a class="link"   href="https://hexo.io/docs/" >English documentation</a> or <a class="link"   href="https://hexo.io/zh-cn/docs/index.html" >中文文档</a> for more info.<br>If you get any problems when using Hexo, you can find the answer in <a class="link"   href="https://hexo.io/docs/troubleshooting.html" >troubleshooting</a> or you can ask me on <a class="link"   href="https://github.com/hexojs/hexo/issues" >GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="初始化网站"><a href="#初始化网站" class="headerlink" title="初始化网站"></a>初始化网站</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo init [folder]</span><br></pre></td></tr></table></figure></div>
-
-<h3 id="创建一个新的-Blog"><a href="#创建一个新的-Blog" class="headerlink" title="创建一个新的 Blog"></a>创建一个新的 Blog</h3><p>如果标题包含空格，使用引号将其包裹起来。</p>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure></div>
-
-<p>More info: <a class="link"   href="https://hexo.io/docs/writing.html" >Writing</a></p>
-<h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure></div>
-
-<p>More info: <a class="link"   href="https://hexo.io/docs/server.html" >Server</a></p>
-<h3 id="清理可能存在的编译缓存问题"><a href="#清理可能存在的编译缓存问题" class="headerlink" title="清理可能存在的编译缓存问题"></a>清理可能存在的编译缓存问题</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo clean</span><br></pre></td></tr></table></figure></div>
-
-<h3 id="编译生成静态文件"><a href="#编译生成静态文件" class="headerlink" title="编译生成静态文件"></a>编译生成静态文件</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure></div>
-
-<p>More info: <a class="link"   href="https://hexo.io/docs/generating.html" >Generating</a></p>
-<h3 id="部署到-github"><a href="#部署到-github" class="headerlink" title="部署到 github"></a>部署到 github</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure></div>
-
-<p>More info: <a class="link"   href="https://hexo.io/docs/one-command-deployment.html" >Deployment</a></p>
-]]></content>
-      <categories>
-        <category>Github pages</category>
-      </categories>
-      <tags>
-        <tag>Blog</tag>
       </tags>
   </entry>
   <entry>
