@@ -265,7 +265,8 @@ pubilc interface IProductAppService : IApplicationService
 }
 ```
 
-创建 ProductAppService 实现类，继承项目创建时生成的基类和 IProductAppService 接口。然后逐一实现CRUD的具体方法。
+创建 ProductAppService 实现类，继承项目创建时生成的基类和 IProductAppService 接口。然后逐一实现 CRUD 的具体方法。
+
 ```C#
 public class ProductAppService(
 	IRepository<Product, Guid> productRepository,
@@ -337,9 +338,10 @@ public class ProductAppService(
 ```
 
 {% note info %}
-Notice: 在撰写的过程中，我们还注意到了提示`CrudAppService`，作为一个ABP的基类，它已经帮我们实现了CRUD的功能，我们只需要继承它，并实现我们自己的业务逻辑即可。具体内容有待探究。
+Notice: 在撰写的过程中，我们还注意到了提示`CrudAppService`，作为一个 ABP 的基类，它已经帮我们实现了 CRUD 的功能，我们只需要继承它，并实现我们自己的业务逻辑即可。具体内容有待探究。
 {% endnote %}
-`ObjectMapper.Map<>`方法在调用的时候会默认使用AutoMapper，所以我们需要去自己去定义一个AutoMapper的配置文件。AutoMapper可以自动将DTO和实体进行转换。在这个例子中，AutoMapper会将 Product 的 Category.Name 自动映射到 ProductDto 的 string 类型的CategoryName上。
+`ObjectMapper.Map<>`方法在调用的时候会默认使用 AutoMapper，所以我们需要去自己去定义一个 AutoMapper 的配置文件。AutoMapper 可以自动将 DTO 和实体进行转换。在这个例子中，AutoMapper 会将 Product 的 Category.Name 自动映射到 ProductDto 的 string 类型的 CategoryName 上。
+
 ```C#
 public ManageSystemApplicationAutoMapperProfile()
 {
@@ -350,7 +352,9 @@ public ManageSystemApplicationAutoMapperProfile()
 	CreateMap<Product, ProductDto>();
 }
 ```
+
 完成后编写测试类，对对应功能进行测试。
+
 ```C#
 public abstract class ProductAppServiceTests<TStartupModule> : ManageSystemApplicationTestBase<TStartupModule>
 	where TStartupModule : IAbpModule
@@ -374,8 +378,13 @@ public abstract class ProductAppServiceTests<TStartupModule> : ManageSystemAppli
 	}
 }
 ```
-因为测试类中不能使用依赖注入的方法，所以我们使用GetRequiredService解决所需要的依赖关系，获取我们所需要的服务。
+
+因为测试类中不能使用依赖注入的方法，所以我们使用 GetRequiredService 解决所需要的依赖关系，获取我们所需要的服务。
 
 {% note warning %}
-Notice: 在实际测试过程中发现，无法在新建的`ProductAppServiceTests`中完成测试。经调查发现，ABP自带的`SampleAppServiceTests`示例在继承了`ManageSystemApplicationTestBase<TStartupModule>`之后，还在`EfCoreSampleAppServiceTests`中再次继承了`SampleAppServiceTests`，最后实现了对内部的测试方法的直接测试调用。因此我们也单独实现了对应的测试方法。在官方的测试示例中，采用了`Substitute.For<>()`方法获取服务，但是会导致空引用错误。[Implementing unit tests in EF Core and MongoDB](https://abp.io/docs/8.0/Testing#implementing-unit-tests-in-ef-core-and-mongodb)
+Notice: 在实际测试过程中发现，无法在新建的`ProductAppServiceTests`中完成测试。经调查发现，ABP 自带的`SampleAppServiceTests`示例在继承了`ManageSystemApplicationTestBase<TStartupModule>`之后，还在`EfCoreSampleAppServiceTests`中再次继承了`SampleAppServiceTests`，最后实现了对内部的测试方法的直接测试调用。因此我们也单独实现了对应的测试方法。在官方的测试示例中，采用了`Substitute.For<>()`方法获取服务，但是会导致空引用错误。[Implementing unit tests in EF Core and MongoDB](https://abp.io/docs/8.0/Testing#implementing-unit-tests-in-ef-core-and-mongodb)
 {% endnote %}
+
+## 自动 API Controller
+
+在 ABP 框架中，实现了自动 API Controller，根据命名约定和相关的配置自动将服务公开为 API 端点。对于前后端分离的项目，我们可以访问其`api/Abp/ServiceProxyScript`，得到自动生成的经过 api client 封装的 API 接口。也可以访问`api/swagger/index.html`，得到对应的 Swagger 文档。
