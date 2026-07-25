@@ -1,0 +1,189 @@
+name: Build & Deploy OpenWrt Package Repository
+
+on:
+  workflow_dispatch:
+    inputs:
+      arch:
+        description: '目标架构 (aarch64 / x86_64 / arm_cortex-a9 等)'
+        required: false
+        default: 'aarch64'
+        type: string
+      openwrt_branch:
+        description: 'OpenWrt 分支版本 (用于索引描述)'
+        required: false
+        default: '25.12.5'
+        type: string
+
+env:
+  OPENWRT_ARCH: ${{ inputs.arch || 'aarch64' }}
+  OPENWRT_BRANCH: ${{ inputs.openwrt_branch || '25.12.5' }}
+  PACKAGES_DIR: packages
+  SOURCE_PACKAGES_DIR: source/packages
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # ─── 从 GitHub Releases 下载 APK 软件包 ───
+      - name: Download APK packages from GitHub Releases
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "═══════════════════════════════════════════════"
+          echo "  OpenWrt APK 软件包下载器 (GitHub Releases)"
+          echo "═══════════════════════════════════════════════"
+          echo "  目标架构: ${{ env.OPENWRT_ARCH }}"
+          echo "  OpenWrt:  ${{ env.OPENWRT_BRANCH }}"
+          echo "═══════════════════════════════════════════════"
+
+          mkdir -p ${{ env.PACKAGES_DIR }}
+          cd ${{ env.PACKAGES_DIR }}
+
+          # ── 定义下载源和目标包 ──
+          # 格式: "仓库地址" -> "包名1 包名2 ..."
+          declare -A REPO_MAP=(
+            ["vernesong/OpenClash"]="luci-app-openclash"
+            ["jerrykuku/luci-theme-argon"]="luci-app-argon-config luci-i18n-argon-config-zh-cn luci-theme-argon"
+          )
+
+          TOTAL_SUCCESS=0
+          TOTAL_FAIL=0
+
+          for REPO in "${!REPO_MAP[@]}"; do
+            echo ""
+            echo "──────────────────────────────────────────"
+            echo "📦 仓库: ${REPO}"
+            echo "   目标包: ${REPO_MAP[$REPO]}"
+            echo "──────────────────────────────────────────"
+
+            # 获取最新 release 的 tag
+            LATEST_TAG=$(gh release view "${REPO}" --json tagName -q '.tagName' 2>/dev/null)
+            if [ -z "${LATEST_TAG}" ]; then
+              echo "  ⚠️  无法获取 ${REPO} 的最新 release，跳过"
+              TOTAL_FAIL=$((TOTAL_FAIL + 1))
+              continue
+            fi
+            echo "  📌 最新版本: ${LATEST_TAG}"
+
+            # 列出该 release 的所有资产文件名
+            ASSETS=$(gh release view "${LATEST_TAG}" --repo "${REPO}" --json assets -q '.assets[].name' 2>/dev/null)
+
+            # 对每个目标包，从资产列表中匹配 APK 文件并下载
+            for PKG in ${REPO_MAP[$REPO]}; do
+              echo ""
+              echo "  🔍 查找 ${PKG} 的 APK..."
+
+              # 优先匹配: 包名开头 + 当前架构 + .apk
+              # 备选匹配: 包名开头 + all (通用架构) + .apk
+              # 兜底匹配: 包名开头 + .apk (任意)
+              MATCHED=$(echo "${ASSETS}" | grep -i "^${PKG}.*${{ env.OPENWRT_ARCH }}.*\.apk$" | head -1 || true)
+              if [ -z "${MATCHED}" ]; then
+                MATCHED=$(echo "${ASSETS}" | grep -i "^${PKG}.*all.*\.apk$" | head -1 || true)
+              fi
+              if [ -z "${MATCHED}" ]; then
+                MATCHED=$(echo "${ASSETS}" | grep -i "^${PKG}.*\.apk$" | head -1 || true)
+              fi
+
+              if [ -z "${MATCHED}" ]; then
+                echo "  ⚠️  未找到 ${PKG} 的 APK 文件 (跳过 .ipk 格式)"
+                TOTAL_FAIL=$((TOTAL_FAIL + 1))
+                continue
+              fi
+
+              FILENAME="${MATCHED}"
+              echo "  📥 下载: ${FILENAME}"
+
+              gh release download "${LATEST_TAG}" \
+                --repo "${REPO}" \
+                --pattern "${FILENAME}" \
+                --dir . \
+                --clobber 2>&1 && {
+                echo "  ✅ ${PKG} 下载成功"
+                TOTAL_SUCCESS=$((TOTAL_SUCCESS + 1))
+              } || {
+                echo "  ❌ ${PKG} 下载失败"
+                TOTAL_FAIL=$((TOTAL_FAIL + 1))
+              }
+            done
+          done
+
+          echo ""
+          echo "═══════════════════════════════════════════════"
+          echo "  📊 下载汇总"
+          echo "═══════════════════════════════════════════════"
+          echo "  成功: ${TOTAL_SUCCESS}  失败: ${TOTAL_FAIL}"
+          echo ""
+          echo "  已下载的 APK 文件:"
+          ls -lh *.apk 2>/dev/null || echo "  (无)"
+          echo "═══════════════════════════════════════════════"
+
+      # ─── 安装 apk-tools 并生成仓库索引 ───
+      - name: Generate APK repository index
+        run: |
+          echo ">>> 安装 Alpine apk-tools 用于生成索引..."
+
+          # 下载 Alpine apk-tools 静态编译版
+          APK_TOOLS_VERSION="2.14.6-r0"
+          wget -q "https://dl-cdn.alpinelinux.org/alpine/v3.21/releases/x86_64/apk-tools-static-${APK_TOOLS_VERSION}.apk" \
+            -O /tmp/apk-tools-static.apk
+
+          cd /tmp
+          ar x apk-tools-static.apk 2>/dev/null || true
+          tar -xzf data.tar.gz 2>/dev/null || true
+          sudo mkdir -p /usr/local/bin
+          sudo cp /tmp/sbin/apk /usr/local/bin/apk
+          sudo chmod +x /usr/local/bin/apk
+
+          echo "✅ apk-tools 版本:"
+          /usr/local/bin/apk --version
+
+          cd "${{ github.workspace }}/${{ env.PACKAGES_DIR }}"
+          APK_COUNT=$(ls *.apk 2>/dev/null | wc -l)
+          echo ""
+          echo "📦 找到 ${APK_COUNT} 个软件包"
+
+          if [ "${APK_COUNT}" -gt 0 ]; then
+            echo ">>> 生成 APKINDEX.tar.gz..."
+
+            /usr/local/bin/apk index \
+              --output APKINDEX.tar.gz \
+              --description "OpenWrt Custom Packages - ${{ env.OPENWRT_BRANCH }}/${{ env.OPENWRT_ARCH }}" \
+              .
+
+            echo ""
+            echo "✅ 索引文件:"
+            ls -lh APKINDEX*
+          else
+            echo "⚠️  没有找到任何 .apk 文件，跳过索引生成"
+          fi
+
+      # ─── 同步到 source/packages ───
+      - name: Sync to source/packages
+        run: |
+          mkdir -p ${{ env.SOURCE_PACKAGES_DIR }}
+
+          cp ${{ env.PACKAGES_DIR }}/*.apk ${{ env.SOURCE_PACKAGES_DIR }}/ 2>/dev/null || true
+          cp ${{ env.PACKAGES_DIR }}/APKINDEX* ${{ env.SOURCE_PACKAGES_DIR }}/ 2>/dev/null || true
+
+          echo "✅ 已同步到 ${{ env.SOURCE_PACKAGES_DIR }}:"
+          ls -lh ${{ env.SOURCE_PACKAGES_DIR }}/
+
+          APK_COUNT=$(ls ${{ env.SOURCE_PACKAGES_DIR }}/*.apk 2>/dev/null | wc -l)
+          echo ""
+          echo "📊 软件源统计: ${APK_COUNT} 个软件包"
+
+      # ─── 构建并部署 GitHub Pages ───
+      - name: Install npm dependencies
+        run: npm install
+
+      - name: Clean, Generate & Deploy
+        run: npm run onetap
