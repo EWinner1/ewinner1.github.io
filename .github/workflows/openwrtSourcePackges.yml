@@ -66,7 +66,11 @@ jobs:
             echo "──────────────────────────────────────────"
 
             # 获取最新 release 的 tag
-            LATEST_TAG=$(gh release view "${REPO}" --json tagName -q '.tagName' 2>/dev/null)
+            LATEST_TAG=$(gh release view \
+            --repo vernesong/OpenClash \
+            --json tagName \
+            -q '.tagName')
+            
             if [ -z "${LATEST_TAG}" ]; then
               echo "  ⚠️  无法获取 ${REPO} 的最新 release，跳过"
               TOTAL_FAIL=$((TOTAL_FAIL + 1))
@@ -75,7 +79,10 @@ jobs:
             echo "  📌 最新版本: ${LATEST_TAG}"
 
             # 列出该 release 的所有资产文件名
-            ASSETS=$(gh release view "${LATEST_TAG}" --repo "${REPO}" --json assets -q '.assets[].name' 2>/dev/null)
+            ASSETS=$(gh release view "${LATEST_TAG}" \
+            --repo "${REPO}" \
+            --json assets \
+            -q '.assets[].name')
 
             # 对每个目标包，从资产列表中匹配 APK 文件并下载
             for PKG in ${REPO_MAP[$REPO]}; do
@@ -123,7 +130,7 @@ jobs:
           echo "  成功: ${TOTAL_SUCCESS}  失败: ${TOTAL_FAIL}"
           echo ""
           echo "  已下载的 APK 文件:"
-          ls -lh *.apk 2>/dev/null || echo "  (无)"
+          ls -lh *.apk  || echo "  (无)"
           echo "═══════════════════════════════════════════════"
 
       # ─── 安装 apk-tools 并生成仓库索引 ───
@@ -143,8 +150,8 @@ jobs:
           fi
 
           cd /tmp
-          ar x apk-tools-static.apk 2>/dev/null || true
-          tar -xzf data.tar.gz 2>/dev/null || true
+          ar x apk-tools-static.apk || true
+          tar -xzf data.tar.gz || true
           sudo mkdir -p /usr/local/bin
           sudo cp /tmp/sbin/apk /usr/local/bin/apk
           sudo chmod +x /usr/local/bin/apk
@@ -177,13 +184,13 @@ jobs:
         run: |
           mkdir -p ${{ env.SOURCE_PACKAGES_DIR }}
 
-          cp ${{ env.PACKAGES_DIR }}/*.apk ${{ env.SOURCE_PACKAGES_DIR }}/ 2>/dev/null || true
-          cp ${{ env.PACKAGES_DIR }}/APKINDEX* ${{ env.SOURCE_PACKAGES_DIR }}/ 2>/dev/null || true
+          cp ${{ env.PACKAGES_DIR }}/*.apk ${{ env.SOURCE_PACKAGES_DIR }}/  || true
+          cp ${{ env.PACKAGES_DIR }}/APKINDEX* ${{ env.SOURCE_PACKAGES_DIR }}/  || true
 
           echo "✅ 已同步到 ${{ env.SOURCE_PACKAGES_DIR }}:"
           ls -lh ${{ env.SOURCE_PACKAGES_DIR }}/
 
-          APK_COUNT=$(ls ${{ env.SOURCE_PACKAGES_DIR }}/*.apk 2>/dev/null | wc -l)
+          APK_COUNT=$(ls ${{ env.SOURCE_PACKAGES_DIR }}/*.apk  | wc -l)
           echo ""
           echo "📊 软件源统计: ${APK_COUNT} 个软件包"
 
