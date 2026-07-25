@@ -132,9 +132,15 @@ jobs:
           echo ">>> 安装 Alpine apk-tools 用于生成索引..."
 
           # 下载 Alpine apk-tools 静态编译版
+          echo ">>> 下载 apk-tools..."
+          
           APK_TOOLS_VERSION="2.14.6-r0"
-          wget -q "https://dl-cdn.alpinelinux.org/alpine/v3.21/releases/x86_64/apk-tools-static-${APK_TOOLS_VERSION}.apk" \
-            -O /tmp/apk-tools-static.apk
+          wget "https://dl-cdn.alpinelinux.org/alpine/v3.21/releases/x86_64/apk-tools-static-${APK_TOOLS_VERSION}.apk" \
+          -O /tmp/apk-tools-static.apk
+          if [ ! -f /tmp/apk-tools-static.apk ]; then
+            echo "❌ apk-tools 下载失败"
+            exit 1
+          fi
 
           cd /tmp
           ar x apk-tools-static.apk 2>/dev/null || true
@@ -147,7 +153,7 @@ jobs:
           /usr/local/bin/apk --version
 
           cd "${{ github.workspace }}/${{ env.PACKAGES_DIR }}"
-          APK_COUNT=$(ls *.apk 2>/dev/null | wc -l)
+          APK_COUNT=$(find . -maxdepth 1 -name "*.apk" -exec ls -lh {} \;)
           echo ""
           echo "📦 找到 ${APK_COUNT} 个软件包"
 
