@@ -319,6 +319,63 @@ jobs:
           ssh-keyscan github.com >> ~/.ssh/known_hosts 2>/dev/null
           echo "✅ SSH key configured"
 
+      # ─── 更新 OpenwrtPackage.md 中的链接 ───
+      - name: Update OpenwrtPackage.md links
+        run: |
+          echo "═══════════════════════════════════════════════"
+          echo "  更新文章链接"
+          echo "═══════════════════════════════════════════════"
+
+          POST_FILE="source/_posts/OpenwrtPackage.md"
+          RES_DIR="${{ env.SOURCE_PACKAGES_DIR }}"
+
+          # 动态查找各包的实际文件名
+          OPENCLASH_FILE=$(find "${RES_DIR}" -maxdepth 1 -name "luci-app-openclash*.apk" -printf "%f" | head -1)
+          THEME_FILE=$(find "${RES_DIR}" -maxdepth 1 -name "luci-theme-argon*.apk" -not -name "luci-app*" -printf "%f" | head -1)
+          ARGON_CONFIG_FILE=$(find "${RES_DIR}" -maxdepth 1 -name "luci-app-argon-config*.apk" -printf "%f" | head -1)
+          I18N_FILE=$(find "${RES_DIR}" -maxdepth 1 -name "luci-i18n-argon-config*.apk" -printf "%f" | head -1)
+
+          echo "  luci-app-openclash:       ${OPENCLASH_FILE:-未找到}"
+          echo "  luci-theme-argon:         ${THEME_FILE:-未找到}"
+          echo "  luci-app-argon-config:    ${ARGON_CONFIG_FILE:-未找到}"
+          echo "  luci-i18n-argon-config:   ${I18N_FILE:-未找到}"
+
+          # 替换 Index 部分的链接
+          INDEX_LINE=$(grep -n "^# Index$" "${POST_FILE}" | head -1 | cut -d: -f1)
+          if [ -n "${INDEX_LINE}" ]; then
+            # 保留 # Index 之前的内容，重新生成 Index 部分
+            head -n "${INDEX_LINE}" "${POST_FILE}" > /tmp/post_tmp.md
+            {
+              echo "# Index"
+              [ -n "${OPENCLASH_FILE}" ]     && echo "- [luci-app-openclash](/resource/${OPENCLASH_FILE})"
+              [ -n "${THEME_FILE}" ]         && echo "- [luci-theme-argon](/resource/${THEME_FILE})"
+              [ -n "${ARGON_CONFIG_FILE}" ]  && echo "- [luci-app-argon-config](/resource/${ARGON_CONFIG_FILE})"
+              [ -n "${I18N_FILE}" ]          && echo "- [luci-i18n-argon-config-zh-cn](/resource/${I18N_FILE})"
+            } >> /tmp/post_tmp.md
+            mv /tmp/post_tmp.md "${POST_FILE}"
+            echo ""
+            echo "✅ 已更新 ${POST_FILE}"
+            echo ""
+            echo "📋 更新后的内容:"
+            sed -n '/^# Index$/,$p' "${POST_FILE}"
+          else
+            echo "⚠️  未找到 # Index 标题，跳过更新"
+          fi
+
+      # ─── 提交链接更新到 main 分支 ───
+      - name: Commit link updates to main
+        run: |
+          git add source/_posts/OpenwrtPackage.md source/resource/
+
+          # 检查是否有变更
+          if git diff --cached --quiet; then
+            echo "ℹ️  没有变更需要提交"
+          else
+            git commit -m "chore: update OpenWrt packages and links [skip ci]"
+            git push origin main
+            echo "✅ 已提交并推送到 main 分支"
+          fi
+
       # ─── 构建并部署 GitHub Pages ───
       - name: Install npm dependencies
         run: npm ci
