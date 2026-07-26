@@ -11,3 +11,7 @@ excerpt: Openwrt Package & Source
 # OpenClash
 [Open Clash](https://github.com/jerrykuku/luci-theme-argon/releases)
 # Index
+- [luci-app-openclash](/resource/luci-app-openclash-0.47.133.apk)
+- [luci-theme-argon](/resource/luci-theme-argon-2.4.5-r1.apk)
+- [luci-app-argon-config](/resource/luci-app-argon-config-2.4.5-r1.apk)
+- [luci-i18n-argon-config-zh-cn](/resource/luci-i18n-argon-config-zh-cn-26.103.13761.3e099a3.apk)
