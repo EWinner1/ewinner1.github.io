@@ -30,6 +30,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          ssh-key: ${{ secrets.ACTION_SSH_PRIVATE }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -298,6 +300,25 @@ jobs:
           echo "📊 最终统计: ${FINAL_APK_COUNT} 个软件包 + 签名索引"
           echo "ℹ️  公钥文件已存在于 source/resource 目录，无需复制"
 
+      # ─── 配置 Git 和 SSH ───
+      - name: Configure Git & SSH
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.ACTION_SSH_PRIVATE }}
+        run: |
+          # 配置 git 用户信息
+          git config --global user.email "ewinner.super@qq.com"
+          git config --global user.name "ewinner"
+          echo "✅ Git user configured"
+
+          # 配置 SSH 私钥
+          mkdir -p ~/.ssh
+          echo "${SSH_PRIVATE_KEY}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+
+          # 添加 GitHub 到 known_hosts
+          ssh-keyscan github.com >> ~/.ssh/known_hosts 2>/dev/null
+          echo "✅ SSH key configured"
+
       # ─── 构建并部署 GitHub Pages ───
       - name: Install npm dependencies
         run: npm ci
@@ -312,5 +333,5 @@ jobs:
           echo "🧹 清理敏感文件..."
           rm -rf /tmp/apk-keys 2>/dev/null || true
           rm -f "${{ env.PACKAGES_DIR }}/apk.static" 2>/dev/null || true
+          rm -f ~/.ssh/id_ed25519 2>/dev/null || true
           echo "✅ 清理完成"
-          echo "已删除: /tmp/apk-keys/apk.sec, apk.static"
