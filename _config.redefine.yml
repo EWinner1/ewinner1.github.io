@@ -53,7 +53,7 @@ global:
     english:
       enable: true # Whether to enable custom english fonts
       family: "Source Code Pro" # Font family
-      url: "https://adobe-fonts.github.io/source-code-pro/" # Font URL to CSS file
+      url: "/fonts/SourceCodePro-Medium.ttf" # Font URL to CSS file
   # Content max width
   content_max_width: 1700px
   # Sidebar width
@@ -145,7 +145,7 @@ home_banner:
     # Font family
     family: "Source Code Pro"
     # URL to font CSS file
-    url: "https://adobe-fonts.github.io/source-code-pro/"
+    url: "/fonts/SourceCodePro-Medium.ttf"
   # Home banner social links
   social_links:
     # Whether to enable
@@ -301,7 +301,7 @@ articles:
     font: # Custom font
       enable: true # Whether to enable
       family: "Source Code Pro" # Font family
-      url: "https://adobe-fonts.github.io/source-code-pro/" # Font URL to CSS file
+      url: "/fonts/SourceCodePro-Medium.ttf" # Font URL to CSS file
   # Table of contents settings
   toc:
     enable: true # Whether to enable TOC
