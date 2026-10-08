@@ -86,6 +86,8 @@ jobs:
           TOTAL_SUCCESS=0
           TOTAL_FAIL=0
           FAILED_PACKAGES=""
+          # 记录成功下载的包名，供后续「先成功、后删除」的替换逻辑使用
+          : > /tmp/success_pkgs.txt
 
           for REPO in "${!REPO_MAP[@]}"; do
             echo ""
@@ -149,6 +151,7 @@ jobs:
                 --dir . \
                 --clobber 2>&1; then
                 echo "  ✅ ${PKG} 下载成功"
+                echo "${PKG}" >> /tmp/success_pkgs.txt
                 TOTAL_SUCCESS=$((TOTAL_SUCCESS + 1))
               else
                 echo "  ❌ ${PKG} 下载失败"
@@ -267,19 +270,47 @@ jobs:
           
           # 创建目标目录
           mkdir -p "${{ env.SOURCE_PACKAGES_DIR }}"
-          
+
           cd "${{ env.PACKAGES_DIR }}"
-          
-          # 复制 APK 包文件
-          echo "📦 复制 APK 包文件..."
-          APK_FILES=$(find . -maxdepth 1 -name "*.apk" -not -name "apk.static" 2>/dev/null)
-          if [ -n "${APK_FILES}" ]; then
-            cp -v *.apk "${{ github.workspace }}/${{ env.SOURCE_PACKAGES_DIR }}/" 2>/dev/null || true
-            # 排除 apk.static
-            rm -f "${{ github.workspace }}/${{ env.SOURCE_PACKAGES_DIR }}/apk.static" 2>/dev/null || true
+
+          # 读取成功下载的包列表（由下载步骤写入）
+          SUCCESS_PKGS="/tmp/success_pkgs.txt"
+          if [ ! -s "${SUCCESS_PKGS}" ]; then
+            echo "::error::没有成功下载任何软件包"
+            exit 1
           fi
-          
-          # 复制签名索引文件
+
+          echo "📦 成功下载的包:"
+          cat "${SUCCESS_PKGS}"
+
+          # 只替换已成功下载的包：先删除其旧版本，再复制新文件。
+          # 下载失败的包不会出现在列表中，其旧文件会被完整保留。
+          BASE="${{ github.workspace }}/${{ env.SOURCE_PACKAGES_DIR }}"
+          while IFS= read -r PKG; do
+            [ -z "${PKG}" ] && continue
+            echo ""
+            echo "🔁 替换包: ${PKG}"
+
+            # 找到 packages/ 里该包的新文件
+            NEW_FILE=$(find . -maxdepth 1 -name "${PKG}*.apk" -printf "%f\n" | head -1)
+            if [ -z "${NEW_FILE}" ]; then
+              echo "  ⚠️  未找到 ${PKG} 的新文件，保留旧文件"
+              continue
+            fi
+
+            # 删除 source/resource 里该包的旧版本文件
+            OLD_COUNT=$(find "${BASE}" -maxdepth 1 -name "${PKG}*.apk" | wc -l)
+            if [ "${OLD_COUNT}" -gt 0 ]; then
+              echo "  🗑️  删除 ${OLD_COUNT} 个旧版本文件"
+              rm -f "${BASE}/${PKG}"*.apk
+            fi
+
+            # 复制新文件
+            cp -v "${NEW_FILE}" "${BASE}/"
+            echo "  ✅ 已替换为 ${NEW_FILE}"
+          done < "${SUCCESS_PKGS}"
+
+          # 复制签名索引文件（生成成功才会复制覆盖，失败则保留旧索引）
           echo ""
           echo "📋 复制签名索引文件..."
           if [ -f "packages.adb" ]; then
@@ -330,10 +361,10 @@ jobs:
           RES_DIR="${{ env.SOURCE_PACKAGES_DIR }}"
 
           # 动态查找各包的实际文件名
-          OPENCLASH_FILE=$(find "${RES_DIR}" -maxdepth 1 -name "luci-app-openclash*.apk" -printf "%f" | head -1)
-          THEME_FILE=$(find "${RES_DIR}" -maxdepth 1 -name "luci-theme-argon*.apk" -not -name "luci-app*" -printf "%f" | head -1)
-          ARGON_CONFIG_FILE=$(find "${RES_DIR}" -maxdepth 1 -name "luci-app-argon-config*.apk" -printf "%f" | head -1)
-          I18N_FILE=$(find "${RES_DIR}" -maxdepth 1 -name "luci-i18n-argon-config*.apk" -printf "%f" | head -1)
+          OPENCLASH_FILE=$(find "${RES_DIR}" -maxdepth 1 -name "luci-app-openclash*.apk" -printf "%f\n" | head -1)
+          THEME_FILE=$(find "${RES_DIR}" -maxdepth 1 -name "luci-theme-argon*.apk" -not -name "luci-app*" -printf "%f\n" | head -1)
+          ARGON_CONFIG_FILE=$(find "${RES_DIR}" -maxdepth 1 -name "luci-app-argon-config*.apk" -printf "%f\n" | head -1)
+          I18N_FILE=$(find "${RES_DIR}" -maxdepth 1 -name "luci-i18n-argon-config*.apk" -printf "%f\n" | head -1)
 
           echo "  luci-app-openclash:       ${OPENCLASH_FILE:-未找到}"
           echo "  luci-theme-argon:         ${THEME_FILE:-未找到}"
