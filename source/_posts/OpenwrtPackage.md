@@ -13,7 +13,7 @@ excerpt: Openwrt Package & Source
 # Index
 - [Packages.adb](/resource/packages.adb)
 - [apk.pub](/resource/apk.pub)
-- [luci-app-openclash](/resource/luci-app-openclash-0.47.156.apk)
-- [luci-theme-argon](/resource/luci-theme-argon-2.4.8-r1.apk)
-- [luci-app-argon-config](/resource/luci-app-argon-config-2.4.8-r1.apk)
+- [luci-app-openclash](/resource/luci-app-openclash-0.48.002.apk)
+- [luci-theme-argon](/resource/luci-theme-argon-2.4.8-r2.apk)
+- [luci-app-argon-config](/resource/luci-app-argon-config-2.4.8-r2.apk)
 - [luci-i18n-argon-config-zh-cn](/resource/luci-i18n-argon-config-zh-cn-26.281.11209.9bafffa.apk)
